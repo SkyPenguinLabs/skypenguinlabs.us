@@ -18,7 +18,7 @@ module.exports = defineConfig({
     trace: "retain-on-failure"
   },
   webServer: {
-    command: "npm run emulate",
+    command: "node scripts/serve-static.js",
     url: baseURL,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000

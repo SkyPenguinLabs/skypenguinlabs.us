@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "emulate": "firebase emulators:start --only hosting --project spl-staticsite",
+    "build": "npm run validate",
+    "clean": "rm -rf output",
+    "validate": "node scripts/validate-site.js",
     "test:visual": "playwright test"
   },
   "devDependencies": {
-    "@playwright/test": "^1.52.0",
-    "firebase-tools": "^14.4.0"
+    "@playwright/test": "^1.52.0"
   }
 }

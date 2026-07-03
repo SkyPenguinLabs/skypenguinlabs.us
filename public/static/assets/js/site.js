@@ -1,5 +1,5 @@
 (function () {
-  const brandImage = "https://avatars.githubusercontent.com/u/121910566?s=400&u=3af69fccc44ae03237b7cd6cac8e2720bfbc726a&v=4";
+  const brandImage = "/static/assets/brand/skypenguinlabs-avatar.png";
 
   const navItems = [
     {
@@ -14,13 +14,13 @@
       href: "/projects/",
       icon: "projects",
       description: "Open-source project lanes, research briefs, and public tooling maps from SkyPenguinLabs.",
-      matchPaths: ["/projects/", "/projects/vibelang/", "/projects/r-and-d/pakwolf/", "/projects/r-and-d/mxorame/", "/projects/ctfx/", "/projects/foss-forest/"],
+      matchPaths: ["/projects/", "https://vibelang.skypenguinlabs.com/", "/projects/vibelang/", "/projects/r-and-d/pakwolf/", "https://mxorome.com", "/projects/ctfx/", "/projects/foss-forest/"],
       children: [
-        { type: "link", label: "V.I.B.E", href: "/projects/vibelang/", icon: "code", description: "Language and workflow research for readable automation plans and traceable operator execution.", matchPaths: ["/projects/vibelang/"] },
+        { type: "link", label: "V.I.B.E", href: "https://vibelang.skypenguinlabs.com/", icon: "code", description: "Language and workflow research for readable automation plans and traceable operator execution.", matchPaths: ["https://vibelang.skypenguinlabs.com/", "/projects/vibelang/"] },
         { type: "link", label: "FOSS Forest", href: "/projects/foss-forest/", icon: "forest", description: "The public catalog for SPL utilities, experiments, documentation tooling, and research briefs.", matchPaths: ["/projects/foss-forest/"] },
         { type: "link", label: "PakWolf", href: "/projects/r-and-d/pakwolf/", icon: "package", description: "R&D for artifact, package, and binary inspection workflows with defensible notes.", matchPaths: ["/projects/r-and-d/pakwolf/"] },
         { type: "link", label: "CTFx", href: "/projects/ctfx/", icon: "flag", description: "Lab and challenge operations for focused security exercises and evidence-oriented practice.", matchPaths: ["/projects/ctfx/"] },
-        { type: "link", label: "MxOramë", href: "/projects/r-and-d/mxorame/", icon: "more", description: "Future R&D lane for memory, orchestration, and automation experiments.", matchPaths: ["/projects/r-and-d/mxorame/"] }
+        { type: "link", label: "MxOramë", href: "https://mxorome.com", icon: "more", description: "Future R&D lane for memory, orchestration, and automation experiments.", matchPaths: ["https://mxorome.com"] }
       ]
     },
     {
@@ -71,6 +71,7 @@
     const hashPath = `${path}${window.location.hash || ""}`;
     const paths = [item.href, ...(item.matchPaths || [])].filter(Boolean);
     return paths.some((candidate) => {
+      if (/^https?:\/\//.test(candidate)) return window.location.href === candidate;
       if (candidate.includes("#")) return hashPath === candidate;
       const normalized = pathWithSlash(candidate);
       return normalized === "/" ? path === "/" : path === normalized || path.startsWith(normalized);
@@ -177,23 +178,14 @@
           </section>
           <nav class="footer-links" aria-label="R&D footer links">
             <h2>R&D</h2>
-            <a href="/projects/vibelang/">V.I.B.E</a>
+            <a href="https://vibelang.skypenguinlabs.com/">V.I.B.E</a>
             <a href="/projects/foss-forest/">FOSS Forest</a>
             <a href="/projects/r-and-d/pakwolf/">PakWolf</a>
             <a href="/projects/ctfx/">CTFx</a>
-            <a href="/projects/r-and-d/mxorame/">MxOramë</a>
-          </nav>
-          <nav class="footer-links" aria-label="Follow the War footer links">
-            <h2>Follow the War</h2>
-            <a href="/war-room/">War Room</a>
-            <a href="/whitepapers/">Whitepapers</a>
-            <a href="https://github.com/SkyPenguinLabs">GitHub organization</a>
-            <a href="https://x.com/SkyPenguinLabs">X / SkyPenguinLabs</a>
-            <a href="https://instagram.com/SkyPenguinLabs">Instagram</a>
+            <a href="https://mxorome.com">MxOramë</a>
           </nav>
           <nav class="footer-links" aria-label="About footer links">
             <h2>About</h2>
-            <a href="/mission/">Mission</a>
             <a href="/pages/spl_forms_list.html">Forms Page</a>
             <a href="/pages/spl_product_iceberg.html">General Product(s)</a>
             <a href="/pages/spl_product_iceberg.html">Courses &amp; eBooks</a>
@@ -202,10 +194,9 @@
           <nav class="footer-links" aria-label="More footer links">
             <h2>More</h2>
             <a href="/tools/">Utilities Index</a>
-            <a href="/tools/docs/">Documentation Index</a>
-            <a href="/tools/upcoming/">Upcoming</a>
             <a href="/sec-tips/">Security Tips</a>
-            <a href="/404.html">404 Route</a>
+            <a href="/war-room/">War Room</a>
+            <a href="https://github.com/SkyPenguinLabs">GitHub organization</a>
           </nav>
         </div>
       </footer>
@@ -392,20 +383,16 @@
     }
 
     document.title = `${project.name} | SkyPenguinLabs`;
-    const forestLink = project.family === "FOSS Forest" && project.slug !== "foss-forest"
-      ? '<a class="btn btn-quiet" href="/projects/foss-forest/">FOSS Forest</a>'
-      : '<a class="btn btn-quiet" href="/projects/">Project map</a>';
+    if (target.children.length > 0) return;
 
     target.innerHTML = `
       <section class="brief">
         <div class="container brief-layout">
           <article>
-            <p class="eyebrow">${project.family}</p>
             <h1>${project.name}</h1>
             <p class="lead">${project.summary}</p>
             <div class="action-row">
               <a class="btn btn-primary" href="${project.repo}">Project source</a>
-              ${forestLink}
               <a class="btn btn-secondary" href="mailto:skypenguinlabs@gmail.com?subject=${encodeURIComponent(project.name + " inquiry")}">Discuss use</a>
             </div>
           </article>
@@ -428,20 +415,6 @@
           <div class="brief-panel">
             <h2>Approach</h2>
             <p>${project.approach}</p>
-          </div>
-        </div>
-      </section>
-      <section class="section">
-        <div class="container">
-          <div class="section-head">
-            <div>
-              <p class="eyebrow">Focus Areas</p>
-              <h2>What this brief tracks</h2>
-            </div>
-            <p class="section-copy">Public labels stay conservative until the implementation, release state, and support model are documented.</p>
-          </div>
-          <div class="grid grid-3">
-            ${project.focus.map((item) => `<div class="card"><span class="chip chip-${project.accent}">Track</span><h3>${item}</h3><p>Scoped as part of the ${project.name} project lane.</p></div>`).join("")}
           </div>
         </div>
       </section>

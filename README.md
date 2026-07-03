@@ -1,5 +1,19 @@
 # SkyPenguinLabs
 
+## Production Site
+
+This is a static Cloudflare Pages site. The main deployable site lives in `public/`, the VibeLang Pages project lives in `sites/vibelang/public/`, and the production contract lives in `site.definition.json`.
+
+Use these commands before deploy:
+
+```sh
+npm run clean
+npm run build
+npm run test:visual
+```
+
+`npm run build` validates required assets, live route files, and local links. Planned routes can stay in `site.definition.json`, but they should not be linked from rendered navigation until a page exists under `public/`.
+
 Using this as the initial what is SkyPenguinlabs exactly - well I have had quite a hard time defining that, so here I am today actually separating it.
 
 SkyPenguinLabs, until 2026 did not have much meaning. Originally, the goal of this business was to create a small scale side funding project which can do small R&D projects for the public, for free of which would be supported by the community with the sales of courses, books, and more. However, after 2026 started I got my initial request for a new position in my career. Of which, the last 6 months forced me to repivot mentalities and ajdust to the current landscape.

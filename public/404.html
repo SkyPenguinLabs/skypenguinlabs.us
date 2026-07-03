@@ -10,41 +10,36 @@
   </head>
   <body>
     <div class="site-shell" data-site-shell>
-      <main id="main">
-        <section class="hero not-found-hero">
-          <div class="container not-found-layout">
-            <article>
-              <p class="eyebrow">404 / SkyPenguinLabs</p>
-              <h1>Signal Lost.</h1>
-              <p class="hero-copy">The requested route is not in the current static site map. Use a known surface below or let the custom 404 catch future pages until they ship.</p>
-              <div class="hero-actions">
-                <a class="btn btn-primary" href="/">Return Home</a>
-                <a class="btn btn-secondary" href="/projects/">View Projects</a>
-                <a class="btn btn-quiet" href="/tools/">Open Utilities</a>
+      <main id="main" class="not-found-main">
+        <section class="not-found-stage" aria-labelledby="not-found-title">
+          <div class="container not-found-terminal">
+            <pre class="not-found-accent" aria-hidden="true">        /\
+   ____/  \____
+ /___  404 ___\
+      \____/</pre>
+            <div class="not-found-screen">
+              <p class="not-found-status">ROUTE TABLE / MISS</p>
+              <h1 id="not-found-title">Signal Lost.</h1>
+              <p class="not-found-copy">The requested route is outside the current SkyPenguinLabs static map. Use one of the live surfaces below to get back on path.</p>
+              <div class="not-found-actions" aria-label="Recovery routes">
+                <a class="not-found-key" href="/" aria-label="Home"><span aria-hidden="true">ESC</span>Home</a>
+                <a class="not-found-key" href="/projects/" aria-label="R&D"><span aria-hidden="true">F1</span>R&amp;D</a>
+                <a class="not-found-key" href="/tools/" aria-label="Utilities"><span aria-hidden="true">F2</span>Utilities</a>
               </div>
-            </article>
+            </div>
             <aside class="not-found-panel" aria-label="Known routes">
               <h2>Known Routes</h2>
               <dl class="route-list">
-                <div>
-                  <dt>Home</dt>
-                  <dd>/</dd>
-                </div>
-                <div>
-                  <dt>R&amp;D</dt>
-                  <dd>/projects/</dd>
-                </div>
-                <div>
-                  <dt>Utilities</dt>
-                  <dd>/tools/</dd>
-                </div>
+                <div><dt>Home</dt><dd>/</dd></div>
+                <div><dt>R&amp;D</dt><dd>/projects/</dd></div>
+                <div><dt>Utilities</dt><dd>/tools/</dd></div>
               </dl>
             </aside>
           </div>
         </section>
       </main>
     </div>
-    <script src="/static/assets/js/projects-data.js"></script>
-    <script src="/static/assets/js/site.js"></script>
+    <script src="/static/assets/js/projects-data.js" defer></script>
+    <script src="/static/assets/js/site.js" defer></script>
   </body>
 </html>

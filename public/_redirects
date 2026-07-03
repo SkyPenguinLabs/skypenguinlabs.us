@@ -1,0 +1,4 @@
+/shop https://shop.skypenguinlabs.com 301
+/shop/* https://shop.skypenguinlabs.com 301
+/projects/vibelang https://vibelang.skypenguinlabs.com/ 301
+/projects/vibelang/* https://vibelang.skypenguinlabs.com/ 301

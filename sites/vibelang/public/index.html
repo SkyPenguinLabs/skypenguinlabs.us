@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="V.I.B.E. is the Virtualized Intermodular Bytecode Environment, a field-used SkyPenguinLabs R&D language for bytecode, diagnostics, automation, and operator evidence.">
+    <title>V.I.B.E. | Virtualized Intermodular Bytecode Environment</title>
+    <link rel="preload" href="/static/assets/vibe-hero-lab.png" as="image">
+    <link rel="stylesheet" href="/static/vibelang.css">
+    <script src="/static/vibelang.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section class="hero" aria-labelledby="vibe-title">
+        <img class="hero-media" src="/static/assets/vibe-hero-lab.png" alt="" width="1536" height="1024" decoding="async">
+        <div class="hero-shade" aria-hidden="true"></div>
+        <div class="navline" aria-label="VibeLang links">
+          <a class="wordmark" href="/">V.I.B.E.</a>
+          <div>
+            <a href="/examples/">Examples</a>
+            <a href="https://github.com/TotallyNotAHaxxer/vibe">Source</a>
+            <a href="mailto:skypenguinlabs@gmail.com?subject=V.I.B.E.%20inquiry">Contact</a>
+          </div>
+        </div>
+        <div class="hero-inner">
+          <p class="eyebrow">SkyPenguinLabs research language</p>
+          <h1 id="vibe-title">V.I.B.E.</h1>
+          <p class="subtitle">Virtualized Intermodular Bytecode Environment</p>
+          <p class="lead">A field-used R&amp;D language for people who need to know what ran, why it ran, and what evidence it left behind.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="/examples/">Explore advanced examples</a>
+            <a class="button" href="#runtime">Study the runtime</a>
+          </div>
+        </div>
+        <div class="hero-status" aria-label="Project status">
+          <span>Lab system</span>
+          <span>Bytecode VM</span>
+          <span>Explicit CLI</span>
+          <span>Evidence first</span>
+        </div>
+      </section>
+
+      <section class="section intro-grid" aria-labelledby="intent-title">
+        <div>
+          <p class="eyebrow">Not a normal scripting language</p>
+          <h2 id="intent-title">Built as a runtime research surface.</h2>
+        </div>
+        <p>V.I.B.E. is currently a lab-based R&amp;D experiment. It is already used in field operations and production applications, but the language is still intentionally experimental, not fully stable, and designed as a proving ground for modern runtime ideas.</p>
+      </section>
+
+      <section class="section audience" aria-label="Primary audience">
+        <article>
+          <span>01</span>
+          <h2>Exploit engineers</h2>
+          <p>Byte packing, binary transforms, runtime traces, and repeatable artifacts for work that has to survive review.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h2>Reverse engineers</h2>
+          <p>Structured diagnostics, artifact stores, module catalogs, and readable source forms around uncertain inputs.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h2>Quantitative analysts</h2>
+          <p>Semantic units, algebra modules, StatCore statistics, benchmark workflows, and reproducible execution surfaces.</p>
+        </article>
+        <article>
+          <span>04</span>
+          <h2>Data analysts</h2>
+          <p>One-liners, field splitting, JSON/text modules, workbench exploration, and automation that keeps provenance visible.</p>
+        </article>
+      </section>
+
+      <section class="section split" id="runtime">
+        <div>
+          <p class="eyebrow">Runtime shape</p>
+          <h2>Source to AST to bytecode to VM.</h2>
+          <p>The local system is organized around a clear execution model: source text becomes lexer output, parser output, canonical AST, compiled bytecode, and runtime values inside a VM. Around that path live syntax profiles, execution profiles, modules, plugins, native hooks, audit cases, fuzz harnesses, examples, benchmarks, and a workbench.</p>
+        </div>
+        <div class="pipeline" aria-label="VibeLang execution pipeline">
+          <span>source</span>
+          <span>lexer</span>
+          <span>parser</span>
+          <span>AST</span>
+          <span>bytecode</span>
+          <span>VM</span>
+          <span>evidence</span>
+        </div>
+      </section>
+
+      <section class="section code-showcase" aria-labelledby="showcase-title">
+        <div class="showcase-head">
+          <div>
+            <p class="eyebrow">Advanced surfaces</p>
+            <h2 id="showcase-title">Code examples that are supposed to look dangerous.</h2>
+          </div>
+          <div class="slide-controls" aria-label="Code slideshow controls">
+            <button type="button" data-slide-prev aria-label="Previous code example">Prev</button>
+            <button type="button" data-slide-next aria-label="Next code example">Next</button>
+          </div>
+        </div>
+
+        <div class="slideshow" data-code-slideshow>
+          <article class="slide is-active" data-slide>
+            <div class="slide-copy">
+              <span class="label">binary + diagnostics</span>
+              <h3>Packed payloads with inspectable failure state.</h3>
+              <p>V.I.B.E. treats byte work, errors, and evidence as first-class operating material instead of console leftovers.</p>
+            </div>
+            <pre class="terminal"><code>register("std/data/bin") as bin
+register("std/data/bytes") as bytes
+register("std/math/hash") as hash
+register("std/runtime/errors") as errors
+
+let fault = errors.with_detail(
+  errors.wrap(errors.new("demo.failure", "showcase failure"), "wrapping demo"),
+  "section",
+  "bytecode-stage")
+
+let packet = pack("VnCxa4", 3735928559u, 4660u, 65u, "MOD!")
+let widened = bytes.concat(packet, pack("V", 305419896u), "\x90\x90")
+print(bin.hexdump(packet), hash.sha256(widened), errors.inspect(fault))</code></pre>
+          </article>
+
+          <article class="slide" data-slide>
+            <div class="slide-copy">
+              <span class="label">semantic units + algebra</span>
+              <h3>Quant work without unit amnesia.</h3>
+              <p>Semantic unit expressions and algebra modules sit beside runtime source, not in a separate notebook layer.</p>
+            </div>
+            <pre class="terminal"><code>register("std/math/algebra") as algebra
+
+let display = unit_context("display", 0.0002645833333333333)
+unit stride = 3 * ft
+
+let mixed = 12 in + 4 cm
+let binary = 1 GiB + 512 MiB
+let torque = 1 J as Nm
+let restored = unit_deserialize(unit_serialize(96 px))
+
+let svd = algebra.svd([[3, 0], [0, 4]])
+let solved = algebra.solve([[2, 1], [1, 1]], [5, 3])
+print(unit_format(mixed, "cm"), unit_format(binary, "MiB"), unit_format(torque), unit_format(restored, "px", display), svd.s[0], solved[0])</code></pre>
+          </article>
+
+          <article class="slide" data-slide>
+            <div class="slide-copy">
+              <span class="label">scheduler + channels</span>
+              <h3>Runtime orchestration as source.</h3>
+              <p>Scheduled functions, channel values, cancellation, and task status become readable source-level flow.</p>
+            </div>
+            <pre class="terminal"><code>let out = open_channel(8)
+
+let periodic = schedule_every(200, fn() {
+  send_value(out, "beat")
+  return "beat"
+})
+
+pause_func(periodic)
+schedule_after(60, fn() {
+  resume_func(periodic)
+  return "resumed"
+})
+
+let first = recv_value(out, 1000)
+cancel_func(periodic)
+print("CONCURRENCY_ORCHESTRATION_OK", first, task_status(periodic))</code></pre>
+          </article>
+
+          <article class="slide" data-slide>
+            <div class="slide-copy">
+              <span class="label">one-liners</span>
+              <h3>Perl-shaped pressure, VM-shaped evidence.</h3>
+              <p>The public CLI uses explicit commands, including one-liner execution under `vibe run` for fast operator transforms.</p>
+            </div>
+            <pre class="terminal"><code>$ vibe run -ane 'print(fields[0], fields[1])' -F: input.txt
+left right
+alpha beta
+
+$ vibe run -M std/data/text --begin 'print("BEGIN")' \
+  -e 'print(line)' --end 'print("END")' -- file-arg</code></pre>
+          </article>
+        </div>
+        <div class="slide-dots" data-slide-dots aria-label="Code example position"></div>
+      </section>
+
+      <section class="section capability-grid" aria-label="VibeLang capabilities">
+        <article>
+          <h2>Explicit command suite</h2>
+          <p>`vibe run`, `vibe repl`, `vibe bench`, `vibe config`, `vibe diagnose`, `vibe tool`, and `vibe help` form the public boundary.</p>
+        </article>
+        <article>
+          <h2>Artifact tools</h2>
+          <p>IDX, log, and blob utilities are grouped under `vibe tool`, keeping evidence operations separate from source execution.</p>
+        </article>
+        <article>
+          <h2>Workbench REPL</h2>
+          <p>The interactive workbench exposes staged source, compact environment status, and command-local reference output.</p>
+        </article>
+        <article>
+          <h2>Stdlib modules</h2>
+          <p>Runtime topics include math, media, data, net, runtime, files, frontend, and userland branches.</p>
+        </article>
+        <article>
+          <h2>Audit corpus</h2>
+          <p>Pass and fault cases cover syntax, stdlib, plugins, platform modules, diagnostics, units, and optional typing.</p>
+        </article>
+        <article>
+          <h2>Benchmark lanes</h2>
+          <p>Benchmark commands support suite runs, shell views, focused debug cases, JSON, Markdown, and text reports.</p>
+        </article>
+      </section>
+
+      <section class="section final-cta" aria-labelledby="cta-title">
+        <p class="eyebrow">Canonical destination</p>
+        <h2 id="cta-title">Study the language where the runtime is visible.</h2>
+        <p>Docs are not being published as a full public route in this pass. The landing page and examples route are the canonical V.I.B.E. surface until the language stabilizes further.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="/examples/">Open specialized examples</a>
+          <a class="button" href="https://github.com/TotallyNotAHaxxer/vibe">Read source</a>
+          <a class="button" href="mailto:skypenguinlabs@gmail.com?subject=V.I.B.E.%20research">Talk research</a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

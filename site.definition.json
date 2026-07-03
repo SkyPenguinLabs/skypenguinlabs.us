@@ -1,0 +1,79 @@
+{
+  "site": {
+    "name": "SkyPenguinLabs",
+    "domain": "skypenguinlabs.com",
+    "publicRoot": "public",
+    "description": "FOSS security tooling, research prototypes, and contractor-oriented engineering support."
+  },
+  "hostingSites": [
+    {
+      "target": "main",
+      "siteId": "spl-staticsite",
+      "domain": "skypenguinlabs.com",
+      "publicRoot": "public"
+    },
+    {
+      "target": "vibelang",
+      "siteId": "spl-vibelang",
+      "domain": "vibelang.skypenguinlabs.com",
+      "publicRoot": "sites/vibelang/public"
+    }
+  ],
+  "brand": {
+    "title": "SkyPenguinLabs",
+    "kicker": "Security R&D",
+    "contactEmail": "skypenguinlabs@gmail.com",
+    "repository": "https://github.com/SkyPenguinLabs"
+  },
+  "assets": [
+    "/static/assets/brand/skypenguinlabs-avatar.png",
+    "/static/assets/brand/spl-stamp.svg",
+    "/static/assets/css/site.css",
+    "/static/assets/js/site.js",
+    "/static/assets/js/projects-data.js",
+    "/static/assets/js/tools-data.js",
+    "/static/assets/js/tools.js"
+  ],
+  "routes": [
+    { "path": "/", "title": "Home", "status": "live" },
+    { "path": "/404.html", "title": "Not Found", "status": "live" },
+    { "path": "/projects/", "title": "Projects", "status": "live" },
+    { "path": "/projects/vibelang/", "title": "VibeLang", "status": "live" },
+    { "path": "/projects/foss-forest/", "title": "FOSS Forest", "status": "live" },
+    { "path": "/projects/foss-forest/blogger-recovery/", "title": "blogger.recovery", "status": "live" },
+    { "path": "/projects/foss-forest/idx-brain/", "title": "idx-brain", "status": "live" },
+    { "path": "/projects/foss-forest/spacetree-blog/", "title": "spacetree.blog", "status": "live" },
+    { "path": "/projects/foss-forest/spl-docgen/", "title": "spl-docgen", "status": "live" },
+    { "path": "/projects/foss-forest/spl-iceberg/", "title": "spl-ICEberg", "status": "live" },
+    { "path": "/projects/foss-forest/spl-samuel/", "title": "spl-SAMuel", "status": "live" },
+    { "path": "/projects/foss-forest/txrop/", "title": "txrop", "status": "live" },
+    { "path": "/projects/r-and-d/pakwolf/", "title": "PakWolf", "status": "live" },
+    { "path": "/projects/ctfx/", "title": "CTFx", "status": "live" },
+    { "path": "/tools/", "title": "Utilities", "status": "live" },
+    { "path": "/tools/view/", "title": "Utility Detail", "status": "live" },
+    { "path": "/sec-tips/", "title": "Security Tips", "status": "live" },
+    { "path": "/pages/spl_forms_list.html", "title": "Forms", "status": "legacy" },
+    { "path": "/pages/spl_product_iceberg.html", "title": "Product Iceberg", "status": "legacy" },
+    { "path": "/pages/spl_art_cave.html", "title": "Art Cave", "status": "legacy" },
+    { "path": "/pages/tos.html", "title": "Terms of Use", "status": "legacy" },
+    { "path": "/war-room/", "title": "War Room", "status": "live" },
+    { "path": "/whitepapers/", "title": "Whitepapers", "status": "planned" },
+    { "path": "/mission/", "title": "Mission", "status": "planned" },
+    { "path": "/tools/docs/", "title": "Documentation Index", "status": "planned" },
+    { "path": "/tools/upcoming/", "title": "Upcoming Utilities", "status": "planned" }
+  ],
+  "subdomainRoutes": [
+    { "target": "vibelang", "path": "/", "title": "V.I.B.E.", "status": "live" },
+    { "target": "vibelang", "path": "/examples/", "title": "V.I.B.E. Examples", "status": "live" }
+  ],
+  "navigation": [
+    { "label": "Home", "href": "/" },
+    { "label": "R&D", "href": "/projects/" },
+    { "label": "Utilities", "href": "/tools/" }
+  ],
+  "productionChecks": {
+    "requireLiveRouteFiles": true,
+    "requireReferencedLocalAssets": true,
+    "failOnBrokenLocalLinks": true
+  }
+}

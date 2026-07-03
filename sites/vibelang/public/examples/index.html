@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Advanced V.I.B.E. examples covering bytecode-era source, diagnostics, semantic units, statistics, concurrency, media modules, taint, and benchmarks.">
+    <title>Advanced Examples | V.I.B.E.</title>
+    <link rel="stylesheet" href="/static/vibelang.css">
+  </head>
+  <body>
+    <main>
+      <header class="examples-hero">
+        <div class="navline examples-nav" aria-label="VibeLang links">
+          <a class="wordmark" href="/">V.I.B.E.</a>
+          <div>
+            <a href="/">Landing</a>
+            <a href="https://github.com/TotallyNotAHaxxer/vibe">Source</a>
+            <a href="mailto:skypenguinlabs@gmail.com?subject=V.I.B.E.%20examples">Contact</a>
+          </div>
+        </div>
+        <div class="examples-head">
+          <p class="eyebrow">Specialized examples</p>
+          <h1>Nothing here is hello world.</h1>
+          <p class="lead">These examples are selected from the active local V.I.B.E. workspace to show language pressure: binary work, diagnostics, semantic units, algebra, scheduler state, statistics, media artifacts, taint, and benchmark flows.</p>
+        </div>
+      </header>
+
+      <section class="example-wall" aria-label="Advanced VibeLang examples">
+        <article class="example feature-example">
+          <div class="example-copy">
+            <span class="label">01-language-surface.vib</span>
+            <h2>Byte payloads, typed structures, closures, and diagnostic objects.</h2>
+            <p>The language surface combines module registration, typed structs, functions, comprehensions, byte packing, regex capture, JSON parsing, hashing, and structured runtime errors in one source file.</p>
+          </div>
+          <pre class="terminal"><code>register("std/data/bin") as bin
+register("std/data/bytes") as bytes
+register("std/data/text") as text
+register("std/data") as data
+register("std/math/hash") as hash
+register("std/runtime/errors") as errors
+
+struct Artifact {
+  name: string
+  kind: string
+  size: int
+}
+
+func make_scaler(factor: int) {
+  return fn(value: int) -> int {
+    return value * factor
+  }
+}
+
+let packet = pack("VnCxa4", 3735928559u, 4660u, 65u, "MOD!")
+let fields = unpack("VnCxa4", packet)
+let widened = bytes.concat(packet, pack("V", 305419896u), "\x90\x90")
+let capture = text.regex_capture_all("user=ada score=9", "([a-z]+)=([a-z0-9]+)")
+let parsed = data.json_parse("{\"name\":\"ada\",\"score\":9}")
+let digest = hash.sha256(widened)
+let fault = errors.with_detail(errors.new("demo.failure", "showcase failure"), "artifact", "packet")
+
+print("SURFACE", fields[1], len(capture), parsed.name, digest, errors.inspect(fault))</code></pre>
+        </article>
+
+        <article class="example">
+          <div class="example-copy">
+            <span class="label">02-diagnostics-and-artifacts.vib</span>
+            <h2>Diagnostics mapped into durable blob evidence.</h2>
+            <p>Runtime diagnostics are not just strings; they can be looked up, tagged, inspected, and paired with artifact storage.</p>
+          </div>
+          <pre class="terminal"><code>register("std/runtime/errors") as err
+register("std/files/vdi") as vdi
+register("std/files/vblob") as vblob
+register("std/data/bin") as bin
+register("std/files/fsio") as io
+
+let diag = vdi.lookup("runtime_error")
+let fault = err.from_diagnostic(diag)
+let tagged = err.with_detail(fault, "surface", "examples")
+let store = io.join_path(io.temp_dir(), "examples-diagnostics.vblob")
+let blob = vblob.put(store, "greeting", "hello diagnostics")
+let payload = bin.to_string(vblob.get(store, "greeting"))
+
+print("DIAGNOSTICS_ARTIFACTS_OK", err.code(tagged), err.stage(tagged), err.title(tagged), payload, blob.id)</code></pre>
+        </article>
+
+        <article class="example">
+          <div class="example-copy">
+            <span class="label">03-semantic-units-and-heavy-math.vib</span>
+            <h2>Physical units beside algebra kernels.</h2>
+            <p>Unit-aware expressions and algebra calls share a runtime, making display units, binary units, temperature math, SVD, solvers, FFT, and clustering part of the same source surface.</p>
+          </div>
+          <pre class="terminal"><code>register("std/math/algebra") as algebra
+
+let display = unit_context("display", 0.0002645833333333333)
+unit stride = 3 * ft
+
+let mixed = 12 in + 4 cm
+let binary = 1 GiB + 512 MiB
+let warm = 25 degC + 10 K
+let torque = 1 J as Nm
+let restored = unit_deserialize(unit_serialize(96 px))
+
+let svd = algebra.svd([[3, 0], [0, 4]])
+let solved = algebra.solve([[2, 1], [1, 1]], [5, 3])
+let fft = algebra.fft([1, 0, 0, 0])
+let kmeans = algebra.kmeans([[0, 0], [0, 1], [9, 9], [9, 8]], 2, 6)
+
+print("SEMANTIC_UNITS_HEAVY_MATH_OK",
+  unit_format(mixed, "cm"),
+  unit_format(binary, "MiB"),
+  unit_format(warm),
+  unit_format(torque),
+  unit_format(restored, "px", display),
+  len(svd.s),
+  solved[0],
+  len(fft),
+  len(kmeans.centroids))</code></pre>
+        </article>
+
+        <article class="example">
+          <div class="example-copy">
+            <span class="label">04-concurrency-orchestration.vib</span>
+            <h2>Scheduler state, channels, pause, resume, and cancellation.</h2>
+            <p>The runtime exposes orchestration in source form so state transitions can be inspected instead of hidden in a host script.</p>
+          </div>
+          <pre class="terminal"><code>let out = open_channel(8)
+
+let periodic = schedule_every(200, fn() {
+  send_value(out, "beat")
+  return "beat"
+})
+
+pause_func(periodic)
+schedule_after(60, fn() {
+  resume_func(periodic)
+  return "resumed"
+})
+
+let first = recv_value(out, 1000)
+cancel_func(periodic)
+
+let burst = trigger_func(fn() {
+  send_value(out, "burst")
+  return "burst"
+})
+
+let second = recv_value(out, 1000)
+print("CONCURRENCY_ORCHESTRATION_OK", first, second, task_wait(burst, 1000), task_status(periodic))</code></pre>
+        </article>
+
+        <article class="example">
+          <div class="example-copy">
+            <span class="label">05-statcore-statistics.vib</span>
+            <h2>StatCore blocks and rolling transforms.</h2>
+            <p>Statistics can be expressed as structured runtime blocks with profiles, rolling windows, quantiles, seeded sampling, and accumulators.</p>
+          </div>
+          <pre class="terminal"><code>register("std/math/stat") as stat
+
+let latency_ms = [42, 51, 49, 80, 73, 55]
+let summary = stat latency_ms {
+  mean = mean()
+  variance = variance(ddof: 1)
+} with { profile: "script" }
+
+let roll = rolling(latency_ms, window: 3, step: 1) {
+  mean = mean()
+}
+
+let scaler = stat.zscore_fit(latency_ms, ddof: 1)
+let rng = stat.rng(2026)
+let acc = stat.var_acc()
+acc.push(42)
+acc.push(51)
+acc.push(49)
+
+print("STATCORE_STATISTICS_OK", summary.mean, summary.variance, stat.quantile(latency_ms, 0.95, method: "hf7"), roll.mean, stat.transform(scaler, latency_ms)[0], rng.sample(latency_ms, 3)[0], acc.finish(ddof: 1))</code></pre>
+        </article>
+
+        <article class="example">
+          <div class="example-copy">
+            <span class="label">06-media-stack.vib</span>
+            <h2>Images and PDFs as runtime artifacts.</h2>
+            <p>The media stack writes multiple image formats, preserves format metadata, and builds a PDF report from generated runtime assets.</p>
+          </div>
+          <pre class="terminal"><code>register("std")
+register("std/media/image") as image
+register("std/media/png") as png
+register("std/media/bmp") as bmp
+register("std/media/jpeg") as jpeg
+register("std/media/pdf") as pdf
+
+let out_dir = std.files.fsio.join_path(std.files.fsio.temp_dir(), "vibe-media-examples")
+std.files.fsio.mkdir_all(out_dir)
+
+let base = image.canvas(18, 12, "#10243f")
+image.fill_rect(base, 1, 1, 6, 4, "#ff7a00")
+image.fill_rect(base, 9, 2, 5, 6, "#00c2a8")
+
+let png_doc = png.from_image(base)
+let png_path = std.files.fsio.join_path(out_dir, "panel.png")
+png.save(png_doc, png_path)
+
+let report = pdf.new()
+let page = pdf.add_page(report, 360, 240)
+pdf.add_text(report, page, 24, 214, 15, "vibe media examples")
+pdf.add_image(report, page, png_doc, 24, 128, 96, 64)
+pdf.save(report, std.files.fsio.join_path(out_dir, "report.pdf"))
+
+print("MEDIA_STACK_OK", png.info(png.load(png_path)).width)</code></pre>
+        </article>
+
+        <article class="example">
+          <div class="example-copy">
+            <span class="label">07-optionals-and-taint.vib</span>
+            <h2>Optional paths and taint-aware input handling.</h2>
+            <p>Configuration reads, fallback values, environment arguments, taint checks, and sanitization can be made explicit at the source level.</p>
+          </div>
+          <pre class="terminal"><code>register("std") as std
+register("std/runtime/env") as env
+register("std/runtime") as runtime
+
+let config = map{"ui": map{"theme": "dark"}, "limits": map{"retries": 3}}
+
+let user_arg = std.runtime.env.arg(99)
+let user = user_arg ?? "guest"
+let ui = config["ui"]? ?? map{}
+let theme = ui["theme"]? ?? "default"
+let region_config = config["deploy"]? ?? map{}
+let limits = config["limits"]? ?? map{}
+let region = region_config["region"]? ?? "local"
+let retries = limits["retries"]? ?? 1
+
+let raw_user = env.get("USER")
+let clean_user = sanitize(raw_user)
+print("OPTIONALS_TAINT_OK", user, theme, region, retries, runtime.taint_enabled(), is_tainted(raw_user), is_tainted(clean_user))</code></pre>
+        </article>
+
+        <article class="example">
+          <div class="example-copy">
+            <span class="label">benchmark command lane</span>
+            <h2>Performance work stays command-local.</h2>
+            <p>The public command suite keeps benchmark runs, shells, debug cases, and report formats under `vibe bench`.</p>
+          </div>
+          <pre class="terminal"><code>$ vibe bench run --manifest benchmarks/manifest.json
+$ vibe bench shell
+$ vibe bench debug scale-loop --break-line 7
+$ vibe bench run --source examples/10-benchmark-scale-loop.vib --profile vibe_bench_profile
+
+fn scale(value: int) -> int {
+  return value * 3
+}
+
+var total: int = 0
+for (i = 0 to 50000) {
+  total = total + scale(i)
+}
+print(total)</code></pre>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
