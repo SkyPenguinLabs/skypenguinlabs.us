@@ -1,8 +1,6 @@
 process.env.PW_TEST_SCREENSHOT_NO_FONTS_READY = "1";
 
 const { expect, test } = require("@playwright/test");
-const fs = require("node:fs");
-const path = require("node:path");
 
 const routes = ["/", "/projects/", "/tools/", "/404.html", "/privacy/"];
 const footerGroups = ["R&D", "About", "More"];
@@ -47,53 +45,8 @@ The cursor keeps watch.`,
   `FINAL LINE:
 War Room placeholder copy ends here. Replace this story when the real incident chronicle is ready.`
 ];
-const repoRoot = path.resolve(__dirname, "..");
-const vibeRoot = path.join(repoRoot, "sites", "vibelang", "public");
-const mimeTypes = new Map([
-  [".html", "text/html; charset=utf-8"],
-  [".css", "text/css; charset=utf-8"],
-  [".js", "application/javascript; charset=utf-8"],
-  [".svg", "image/svg+xml"],
-  [".png", "image/png"]
-]);
-
 function safeName(route) {
   return route === "/" ? "home" : route.replace(/^\/|\/$/g, "").replaceAll("/", "-").replaceAll(".", "-");
-}
-
-async function routeVibeLang(page) {
-  await page.route("https://vibelang.skypenguinlabs.com/**", async (route) => {
-    const url = new URL(route.request().url());
-    const redirectedPaths = new Set(["/docs", "/documentation", "/showcase", "/quickstart"]);
-    if (redirectedPaths.has(url.pathname) || url.pathname.startsWith("/docs/")) {
-      await route.fulfill({
-        status: 301,
-        headers: {
-          location: "/"
-        },
-        body: ""
-      });
-      return;
-    }
-
-    const decodedPath = decodeURIComponent(url.pathname);
-    const relativePath = decodedPath === "/" ? "index.html" : decodedPath.replace(/^\//, "");
-    const candidate = path.normalize(path.join(vibeRoot, relativePath));
-    const target = candidate.startsWith(vibeRoot) && fs.existsSync(candidate) && fs.statSync(candidate).isFile()
-      ? candidate
-      : path.join(vibeRoot, relativePath, "index.html");
-
-    if (!target.startsWith(vibeRoot) || !fs.existsSync(target)) {
-      await route.fulfill({ status: 404, body: "Not found" });
-      return;
-    }
-
-    await route.fulfill({
-      status: 200,
-      contentType: mimeTypes.get(path.extname(target)) || "application/octet-stream",
-      body: fs.readFileSync(target)
-    });
-  });
 }
 
 test.describe("site chrome visual coverage", () => {
@@ -122,7 +75,7 @@ test.describe("site chrome visual coverage", () => {
       await expect(headerNav.getByRole("link", { name: "Home", exact: true })).toBeVisible();
       await expect(headerNav.getByRole("button", { name: /R&D/ })).toBeVisible();
       await expect(headerNav.getByRole("button", { name: /Utilities/ })).toBeVisible();
-      await expect(headerNav.locator('a[href="https://vibelang.skypenguinlabs.com/"]').filter({ hasText: "V.I.B.E" }).first()).toHaveAttribute("href", "https://vibelang.skypenguinlabs.com/");
+      await expect(headerNav.locator('a[href="/vibelang/"]').filter({ hasText: "V.I.B.E" }).first()).toHaveAttribute("href", "/vibelang/");
 
       const footer = page.getByRole("contentinfo");
       for (const group of footerGroups) {
@@ -132,7 +85,7 @@ test.describe("site chrome visual coverage", () => {
       for (const link of footerLinks) {
         await expect(footer.getByRole("link", { name: link, exact: true }).last()).toBeVisible();
       }
-      await expect(footer.getByRole("link", { name: "V.I.B.E", exact: true }).last()).toHaveAttribute("href", "https://vibelang.skypenguinlabs.com/");
+      await expect(footer.getByRole("link", { name: "V.I.B.E", exact: true }).last()).toHaveAttribute("href", "/vibelang/");
 
       if (route === "/404.html" || route === "/privacy/") {
         await expect(page.getByRole("heading", { name: "Signal Lost." })).toBeVisible();
@@ -156,13 +109,9 @@ test.describe("site chrome visual coverage", () => {
   }
 });
 
-test.describe("vibelang subdomain", () => {
-  test.beforeEach(async ({ page }) => {
-    await routeVibeLang(page);
-  });
-
+test.describe("vibelang path", () => {
   test("home renders without main-site chrome", async ({ page }, testInfo) => {
-    await page.goto("https://vibelang.skypenguinlabs.com/", { waitUntil: "domcontentloaded" });
+    await page.goto("/vibelang/", { waitUntil: "domcontentloaded" });
 
     await expect(page.getByRole("heading", { name: "V.I.B.E." })).toBeVisible();
     await expect(page.getByText("Virtualized Intermodular Bytecode Environment")).toBeVisible();
@@ -172,9 +121,9 @@ test.describe("vibelang subdomain", () => {
     await expect(page.getByText("Exploit engineers")).toBeVisible();
     await expect(page.getByText("Quantitative analysts")).toBeVisible();
     await expect(page.locator("banner, navigation, contentinfo, .site-header, .site-footer, [data-site-shell]")).toHaveCount(0);
-    await expect(page.getByRole("link", { name: "Explore advanced examples" })).toHaveAttribute("href", "/examples/");
+    await expect(page.getByRole("link", { name: "Explore advanced examples" })).toHaveAttribute("href", "/vibelang/examples/");
     await expect(page.locator("pre code").first()).toContainText("register(\"std/data/bin\")");
-    await expect(page.locator(".hero-media")).toHaveAttribute("src", "/static/assets/vibe-hero-lab.png");
+    await expect(page.locator(".hero-media")).toHaveAttribute("src", "/vibelang/static/assets/vibe-hero-lab.png");
 
     await page.screenshot({
       fullPage: true,
@@ -183,7 +132,7 @@ test.describe("vibelang subdomain", () => {
   });
 
   test("code slideshow controls advance examples", async ({ page }) => {
-    await page.goto("https://vibelang.skypenguinlabs.com/", { waitUntil: "domcontentloaded" });
+    await page.goto("/vibelang/", { waitUntil: "domcontentloaded" });
 
     await expect(page.locator(".slide.is-active")).toContainText("binary + diagnostics");
     await page.getByRole("button", { name: "Next code example" }).click();
@@ -194,7 +143,7 @@ test.describe("vibelang subdomain", () => {
   });
 
   test("examples route renders snippets and fits the viewport", async ({ page, isMobile }, testInfo) => {
-    await page.goto("https://vibelang.skypenguinlabs.com/examples/", { waitUntil: "domcontentloaded" });
+    await page.goto("/vibelang/examples/", { waitUntil: "domcontentloaded" });
 
     await expect(page.getByRole("heading", { name: "Nothing here is hello world." })).toBeVisible();
     await expect(page.getByText("01-language-surface.vib")).toBeVisible();
@@ -230,8 +179,8 @@ test.describe("vibelang subdomain", () => {
   });
 
   test("examples remains live", async ({ page }) => {
-    await page.goto("https://vibelang.skypenguinlabs.com/examples/", { waitUntil: "domcontentloaded" });
-    expect(page.url()).toBe("https://vibelang.skypenguinlabs.com/examples/");
+    await page.goto("/vibelang/examples/", { waitUntil: "domcontentloaded" });
+    expect(new URL(page.url()).pathname).toBe("/vibelang/examples/");
     await expect(page.getByRole("heading", { name: "Nothing here is hello world." })).toBeVisible();
   });
 });

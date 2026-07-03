@@ -14,9 +14,9 @@
       href: "/projects/",
       icon: "projects",
       description: "Open-source project lanes, research briefs, and public tooling maps from SkyPenguinLabs.",
-      matchPaths: ["/projects/", "https://vibelang.skypenguinlabs.com/", "/projects/vibelang/", "/projects/r-and-d/pakwolf/", "https://mxorome.com", "/projects/ctfx/", "/projects/foss-forest/"],
+      matchPaths: ["/projects/", "/vibelang/", "/projects/vibelang/", "/projects/r-and-d/pakwolf/", "https://mxorome.com", "/projects/ctfx/", "/projects/foss-forest/"],
       children: [
-        { type: "link", label: "V.I.B.E", href: "https://vibelang.skypenguinlabs.com/", icon: "code", description: "Language and workflow research for readable automation plans and traceable operator execution.", matchPaths: ["https://vibelang.skypenguinlabs.com/", "/projects/vibelang/"] },
+        { type: "link", label: "V.I.B.E", href: "/vibelang/", icon: "code", description: "Language and workflow research for readable automation plans and traceable operator execution.", matchPaths: ["/vibelang/", "/projects/vibelang/"] },
         { type: "link", label: "FOSS Forest", href: "/projects/foss-forest/", icon: "forest", description: "The public catalog for SPL utilities, experiments, documentation tooling, and research briefs.", matchPaths: ["/projects/foss-forest/"] },
         { type: "link", label: "PakWolf", href: "/projects/r-and-d/pakwolf/", icon: "package", description: "R&D for artifact, package, and binary inspection workflows with defensible notes.", matchPaths: ["/projects/r-and-d/pakwolf/"] },
         { type: "link", label: "CTFx", href: "/projects/ctfx/", icon: "flag", description: "Lab and challenge operations for focused security exercises and evidence-oriented practice.", matchPaths: ["/projects/ctfx/"] },
@@ -178,7 +178,7 @@
           </section>
           <nav class="footer-links" aria-label="R&D footer links">
             <h2>R&D</h2>
-            <a href="https://vibelang.skypenguinlabs.com/">V.I.B.E</a>
+            <a href="/vibelang/">V.I.B.E</a>
             <a href="/projects/foss-forest/">FOSS Forest</a>
             <a href="/projects/r-and-d/pakwolf/">PakWolf</a>
             <a href="/projects/ctfx/">CTFx</a>

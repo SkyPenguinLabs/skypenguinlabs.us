@@ -31,6 +31,11 @@ const largeHtmlAllowlist = new Set([
   "public/pages/tos.html"
 ]);
 
+const forbiddenReferences = [
+  ["vibelang", "skypenguinlabs.com"].join("."),
+  ["vibelang", "skypenguinlabs.us"].join(".")
+];
+
 function fail(message) {
   failures.push(message);
 }
@@ -199,21 +204,14 @@ function validateCloudflarePagesConfig() {
       if (!hasRedirect(redirects, "/shop/*", "https://shop.skypenguinlabs.com")) {
         fail("main Cloudflare Pages target is missing /shop/* redirect to shop subdomain");
       }
-      if (!hasRedirect(redirects, "/projects/vibelang", "https://vibelang.skypenguinlabs.com/")) {
-        fail("main Cloudflare Pages target is missing /projects/vibelang redirect to VibeLang subdomain");
+      if (!hasRedirect(redirects, "/projects/vibelang", "/vibelang/")) {
+        fail("main Cloudflare Pages target is missing /projects/vibelang redirect to /vibelang/");
       }
-      if (!hasRedirect(redirects, "/projects/vibelang/*", "https://vibelang.skypenguinlabs.com/")) {
-        fail("main Cloudflare Pages target is missing /projects/vibelang/* redirect to VibeLang subdomain");
+      if (!hasRedirect(redirects, "/projects/vibelang/*", "/vibelang/")) {
+        fail("main Cloudflare Pages target is missing /projects/vibelang/* redirect to /vibelang/");
       }
     }
 
-    if (site.target === "vibelang") {
-      for (const source of ["/docs", "/docs/*", "/documentation", "/showcase", "/quickstart"]) {
-        if (!hasRedirect(redirects, source, "/")) {
-          fail(`vibelang Cloudflare Pages target is missing obsolete-route redirect: ${source}`);
-        }
-      }
-    }
   }
 }
 
@@ -325,6 +323,20 @@ function validateNoRemoteAvatar() {
   }
 }
 
+function validateNoForbiddenReferences() {
+  const files = walkFiles(repoRoot, new Set([".html", ".css", ".js", ".json", ".md", ".txt"]));
+  for (const file of files) {
+    if (file.includes(`${path.sep}node_modules${path.sep}`)) continue;
+    if (file.includes(`${path.sep}.git${path.sep}`)) continue;
+    const source = fs.readFileSync(file, "utf8");
+    for (const reference of forbiddenReferences) {
+      if (source.includes(reference)) {
+        fail(`forbidden VibeLang subdomain reference remains in ${relativePath(file)}: ${reference}`);
+      }
+    }
+  }
+}
+
 function validateProjectBriefFallbacks() {
   const files = walkFiles(path.join(publicRoot, "projects"), new Set([".html"]));
   const briefPattern = /<main\b[^>]*\bdata-project-brief=["'][^"']+["'][^>]*>([\s\S]*?)<\/main>/i;
@@ -390,6 +402,7 @@ validateDefinition();
 validateReferences();
 validateTargetBlankRel();
 validateNoRemoteAvatar();
+validateNoForbiddenReferences();
 validateProjectBriefFallbacks();
 validateDuplicateStaticAssets();
 validatePublicHtmlSize();

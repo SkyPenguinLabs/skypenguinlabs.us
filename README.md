@@ -2,7 +2,7 @@
 
 ## Production Site
 
-This is a static Cloudflare Pages site. The main deployable site lives in `public/`, the VibeLang Pages project lives in `sites/vibelang/public/`, and the production contract lives in `site.definition.json`.
+This is a static Cloudflare site. The deployable site lives in `public/`, including the VibeLang section at `/vibelang/`, and the production contract lives in `site.definition.json`.
 
 Use these commands before deploy:
 

@@ -11,12 +11,6 @@
       "siteId": "spl-staticsite",
       "domain": "skypenguinlabs.com",
       "publicRoot": "public"
-    },
-    {
-      "target": "vibelang",
-      "siteId": "spl-vibelang",
-      "domain": "vibelang.skypenguinlabs.com",
-      "publicRoot": "sites/vibelang/public"
     }
   ],
   "brand": {
@@ -37,6 +31,8 @@
   "routes": [
     { "path": "/", "title": "Home", "status": "live" },
     { "path": "/404.html", "title": "Not Found", "status": "live" },
+    { "path": "/vibelang/", "title": "V.I.B.E.", "status": "live" },
+    { "path": "/vibelang/examples/", "title": "V.I.B.E. Examples", "status": "live" },
     { "path": "/projects/", "title": "Projects", "status": "live" },
     { "path": "/projects/vibelang/", "title": "VibeLang", "status": "live" },
     { "path": "/projects/foss-forest/", "title": "FOSS Forest", "status": "live" },
@@ -62,10 +58,7 @@
     { "path": "/tools/docs/", "title": "Documentation Index", "status": "planned" },
     { "path": "/tools/upcoming/", "title": "Upcoming Utilities", "status": "planned" }
   ],
-  "subdomainRoutes": [
-    { "target": "vibelang", "path": "/", "title": "V.I.B.E.", "status": "live" },
-    { "target": "vibelang", "path": "/examples/", "title": "V.I.B.E. Examples", "status": "live" }
-  ],
+  "subdomainRoutes": [],
   "navigation": [
     { "label": "Home", "href": "/" },
     { "label": "R&D", "href": "/projects/" },

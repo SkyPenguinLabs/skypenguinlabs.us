@@ -2,7 +2,7 @@ window.SPL_PROJECTS = [
   {
     slug: "vibelang",
     name: "VibeLang",
-    path: "https://vibelang.skypenguinlabs.com/",
+    path: "/vibelang/",
     family: "Language R&D",
     accent: "cyan",
     status: "Research brief",

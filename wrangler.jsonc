@@ -1,0 +1,22 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "skypenguinlabs-thealamo",
+  "compatibility_date": "2026-07-03",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": false,
+  "assets": {
+    "directory": "./public",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "routes": [
+    {
+      "pattern": "skypenguinlabs.us",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.skypenguinlabs.us",
+      "custom_domain": true
+    }
+  ]
+}
