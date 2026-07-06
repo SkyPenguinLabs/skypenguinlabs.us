@@ -25,15 +25,27 @@
     },
     {
       type: "group",
-      label: "Utilities",
-      href: "/tools/",
-      icon: "tools",
-      description: "Practical operator utilities organized by automation, cybersecurity, and reusable snippets.",
-      matchPaths: ["/tools/", "/tools/docs/", "/tools/upcoming/"],
+      label: "Education",
+      href: "/pages/spl_product_iceberg.html",
+      icon: "snippets",
+      description: "Courses, blogs, and research writing from SkyPenguinLabs.",
+      matchPaths: ["/pages/spl_product_iceberg.html", "https://blogs.skypenguinlabs.us", "https://research.skypenguinlabs.us"],
       children: [
-        { type: "link", label: "Index", href: "/tools/", icon: "tools", description: "The public catalog of SkyPenguinLabs utilities and operational references.", matchPaths: ["/tools/"] },
-        { type: "link", label: "Documentation Index", href: "/tools/docs/", icon: "snippets", description: "Future documentation index for utility manuals, field notes, and release references.", matchPaths: ["/tools/docs/"] },
-        { type: "link", label: "Upcoming", href: "/tools/upcoming/", icon: "automation", description: "Future queue for utilities that are planned, staged, or being prepared for release.", matchPaths: ["/tools/upcoming/"] }
+        { type: "link", label: "Courses", href: "/pages/spl_product_iceberg.html", icon: "snippets", description: "Course and product listings from SkyPenguinLabs.", matchPaths: ["/pages/spl_product_iceberg.html"] },
+        { type: "link", label: "Blogs", href: "https://blogs.skypenguinlabs.us", icon: "more", description: "Public SkyPenguinLabs blog writing.", matchPaths: ["https://blogs.skypenguinlabs.us"] },
+        { type: "link", label: "Whitepapers", href: "https://research.skypenguinlabs.us", icon: "projects", description: "Research notes and whitepaper publications.", matchPaths: ["https://research.skypenguinlabs.us"] }
+      ]
+    },
+    {
+      type: "group",
+      label: "Support",
+      href: "/shop",
+      icon: "shop",
+      description: "Purchase products or reach the SkyPenguinLabs forms page.",
+      matchPaths: ["/shop", "/pages/spl_forms_list.html"],
+      children: [
+        { type: "link", label: "Product Shop", href: "/shop", icon: "shop", description: "Shop SkyPenguinLabs products and services.", matchPaths: ["/shop"] },
+        { type: "link", label: "Forms Page", href: "/pages/spl_forms_list.html", icon: "mail", description: "Open the forms page for support and contact workflows.", matchPaths: ["/pages/spl_forms_list.html"] }
       ]
     }
   ];
@@ -176,14 +188,6 @@
               <a class="icon-link" href="https://instagram.com/SkyPenguinLabs" aria-label="SkyPenguinLabs on Instagram">${icons.instagram}</a>
             </div>
           </section>
-          <nav class="footer-links" aria-label="R&D footer links">
-            <h2>R&D</h2>
-            <a href="/vibelang/">V.I.B.E</a>
-            <a href="/projects/foss-forest/">FOSS Forest</a>
-            <a href="/projects/r-and-d/pakwolf/">PakWolf</a>
-            <a href="/projects/ctfx/">CTFx</a>
-            <a href="https://mxorome.com">MxOramë</a>
-          </nav>
           <nav class="footer-links" aria-label="About footer links">
             <h2>About</h2>
             <a href="/pages/spl_forms_list.html">Forms Page</a>
@@ -191,8 +195,8 @@
             <a href="/pages/spl_product_iceberg.html">Courses &amp; eBooks</a>
             <a href="mailto:skypenguinlabs@gmail.com">Contact</a>
           </nav>
-          <nav class="footer-links" aria-label="More footer links">
-            <h2>More</h2>
+          <nav class="footer-links" aria-label="Misc footer links">
+            <h2>Misc</h2>
             <a href="/tools/">Utilities Index</a>
             <a href="/sec-tips/">Security Tips</a>
             <a href="/war-room/">War Room</a>

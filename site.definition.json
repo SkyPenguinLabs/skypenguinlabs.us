@@ -62,7 +62,8 @@
   "navigation": [
     { "label": "Home", "href": "/" },
     { "label": "R&D", "href": "/projects/" },
-    { "label": "Utilities", "href": "/tools/" }
+    { "label": "Education", "href": "/pages/spl_product_iceberg.html" },
+    { "label": "Support", "href": "/shop" }
   ],
   "productionChecks": {
     "requireLiveRouteFiles": true,

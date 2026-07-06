@@ -3,13 +3,8 @@ process.env.PW_TEST_SCREENSHOT_NO_FONTS_READY = "1";
 const { expect, test } = require("@playwright/test");
 
 const routes = ["/", "/projects/", "/tools/", "/404.html", "/privacy/"];
-const footerGroups = ["R&D", "About", "More"];
+const footerGroups = ["About", "Misc"];
 const footerLinks = [
-  "V.I.B.E",
-  "FOSS Forest",
-  "PakWolf",
-  "CTFx",
-  "MxOramë",
   "Forms Page",
   "General Product(s)",
   "Courses & eBooks",
@@ -74,18 +69,20 @@ test.describe("site chrome visual coverage", () => {
       const headerNav = page.locator(isMobile ? ".mobile-nav" : ".desktop-nav");
       await expect(headerNav.getByRole("link", { name: "Home", exact: true })).toBeVisible();
       await expect(headerNav.getByRole("button", { name: /R&D/ })).toBeVisible();
-      await expect(headerNav.getByRole("button", { name: /Utilities/ })).toBeVisible();
+      await expect(headerNav.getByRole("button", { name: /Education/ })).toBeVisible();
+      await expect(headerNav.getByRole("button", { name: /Support/ })).toBeVisible();
+      await expect(headerNav.getByRole("button", { name: /Utilities/ })).toHaveCount(0);
       await expect(headerNav.locator('a[href="/vibelang/"]').filter({ hasText: "V.I.B.E" }).first()).toHaveAttribute("href", "/vibelang/");
 
       const footer = page.getByRole("contentinfo");
       for (const group of footerGroups) {
         await expect(footer.getByRole("heading", { name: group, exact: true })).toBeVisible();
       }
+      await expect(footer.getByRole("heading", { name: "R&D", exact: true })).toHaveCount(0);
 
       for (const link of footerLinks) {
         await expect(footer.getByRole("link", { name: link, exact: true }).last()).toBeVisible();
       }
-      await expect(footer.getByRole("link", { name: "V.I.B.E", exact: true }).last()).toHaveAttribute("href", "/vibelang/");
 
       if (route === "/404.html" || route === "/privacy/") {
         await expect(page.getByRole("heading", { name: "Signal Lost." })).toBeVisible();
@@ -114,16 +111,17 @@ test.describe("vibelang path", () => {
     await page.goto("/vibelang/", { waitUntil: "domcontentloaded" });
 
     await expect(page.getByRole("heading", { name: "V.I.B.E." })).toBeVisible();
-    await expect(page.getByText("Virtualized Intermodular Bytecode Environment")).toBeVisible();
-    await expect(page.getByText("field-used R&D language")).toBeVisible();
-    await expect(page.getByText("lab-based R&D experiment")).toBeVisible();
-    await expect(page.getByRole("heading", { name: "Source to AST to bytecode to VM." })).toBeVisible();
-    await expect(page.getByText("Exploit engineers")).toBeVisible();
-    await expect(page.getByText("Quantitative analysts")).toBeVisible();
-    await expect(page.locator("banner, navigation, contentinfo, .site-header, .site-footer, [data-site-shell]")).toHaveCount(0);
-    await expect(page.getByRole("link", { name: "Explore advanced examples" })).toHaveAttribute("href", "/vibelang/examples/");
-    await expect(page.locator("pre code").first()).toContainText("register(\"std/data/bin\")");
-    await expect(page.locator(".hero-media")).toHaveAttribute("src", "/vibelang/static/assets/vibe-hero-lab.png");
+    await expect(page.getByText("VIRTUALIZED INTERMODULAR BYTECODE ENVIRONMENT").first()).toBeVisible();
+    await expect(page.getByText("A lab-born programming language for data analysts, exploit engineers, reverse engineers,")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "The language is a complete product surface, not just syntax." })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Designed around evidence and explainability." })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Explicit commands, metadata-heavy help, and one-liner execution." })).toBeVisible();
+    await expect(page.locator(".site-header, .site-footer, [data-site-shell]")).toHaveCount(0);
+    await expect(page.locator('link[rel="stylesheet"]')).toHaveAttribute("href", "/vibelang/static/HomePageDarkStyle.css");
+    await expect(page.getByRole("link", { name: "PROJECT HOME", exact: true })).toHaveAttribute("href", "/vibelang/");
+    await expect(page.getByRole("link", { name: "DOCS", exact: true })).toHaveAttribute("href", "#docs");
+    await expect(page.getByRole("link", { name: "LANGUAGE DOCS", exact: true })).toHaveAttribute("href", "/vibelang/");
+    await expect(page.locator("pre code").filter({ hasText: "vibe run -ane" })).toBeVisible();
 
     await page.screenshot({
       fullPage: true,
@@ -131,15 +129,18 @@ test.describe("vibelang path", () => {
     });
   });
 
-  test("code slideshow controls advance examples", async ({ page }) => {
+  test("home keeps desktop landing anchors and command surfaces", async ({ page }) => {
     await page.goto("/vibelang/", { waitUntil: "domcontentloaded" });
 
-    await expect(page.locator(".slide.is-active")).toContainText("binary + diagnostics");
-    await page.getByRole("button", { name: "Next code example" }).click();
-    await expect(page.locator(".slide.is-active")).toContainText("semantic units + algebra");
-    await page.getByRole("button", { name: "Previous code example" }).click();
-    await expect(page.locator(".slide.is-active")).toContainText("binary + diagnostics");
-    await expect(page.locator("[data-slide-dots] button")).toHaveCount(4);
+    await expect(page.locator("#overview")).toBeVisible();
+    await expect(page.locator("#runtime")).toBeVisible();
+    await expect(page.locator("#stdlib")).toBeVisible();
+    await expect(page.locator("#cli")).toBeVisible();
+    await expect(page.locator("#status")).toBeVisible();
+    await expect(page.getByText("LANGUAGE FACT SHEET")).toBeVisible();
+    await expect(page.getByText("source text -> lexer -> parser -> canonical AST -> compiler -> bytecode module -> VM/runtime")).toBeVisible();
+    await expect(page.getByText("Linux-only in this workspace.")).toBeVisible();
+    await expect(page.getByText("Native networking V1 with HTTP, TCP, proxy, testing, and gated raw networking.")).toBeVisible();
   });
 
   test("examples route renders snippets and fits the viewport", async ({ page, isMobile }, testInfo) => {
