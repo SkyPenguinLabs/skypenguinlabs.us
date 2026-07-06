@@ -182,7 +182,7 @@
             </a>
             <p>Tools, research prototypes, documentation utilities, and contractor-oriented execution for security teams that need direct technical output.</p>
             <div class="social-links" aria-label="SkyPenguinLabs social links">
-              <a class="icon-link" href="mailto:skypenguinlabs@gmail.com" aria-label="Email SkyPenguinLabs">${icons.mail}</a>
+              <a class="icon-link" href="mailto:contact@skypenguinlabs.com" aria-label="Email SkyPenguinLabs">${icons.mail}</a>
               <a class="icon-link" href="https://github.com/SkyPenguinLabs" aria-label="SkyPenguinLabs on GitHub">${icons.github}</a>
               <a class="icon-link" href="https://x.com/SkyPenguinLabs" aria-label="SkyPenguinLabs on X">${icons.x}</a>
               <a class="icon-link" href="https://instagram.com/SkyPenguinLabs" aria-label="SkyPenguinLabs on Instagram">${icons.instagram}</a>
@@ -193,7 +193,7 @@
             <a href="/pages/spl_forms_list.html">Forms Page</a>
             <a href="/pages/spl_product_iceberg.html">General Product(s)</a>
             <a href="/pages/spl_product_iceberg.html">Courses &amp; eBooks</a>
-            <a href="mailto:skypenguinlabs@gmail.com">Contact</a>
+            <a href="mailto:contact@skypenguinlabs.com">Contact</a>
           </nav>
           <nav class="footer-links" aria-label="Misc footer links">
             <h2>Misc</h2>
@@ -397,7 +397,7 @@
             <p class="lead">${project.summary}</p>
             <div class="action-row">
               <a class="btn btn-primary" href="${project.repo}">Project source</a>
-              <a class="btn btn-secondary" href="mailto:skypenguinlabs@gmail.com?subject=${encodeURIComponent(project.name + " inquiry")}">Discuss use</a>
+              <a class="btn btn-secondary" href="mailto:contact@skypenguinlabs.com?subject=${encodeURIComponent(project.name + " inquiry")}">Discuss use</a>
             </div>
           </article>
           <aside class="brief-panel" aria-label="Project facts">
