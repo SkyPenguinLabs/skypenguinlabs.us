@@ -28,9 +28,9 @@
       href: "/pages/spl_product_iceberg.html",
       icon: "snippets",
       description: "Courses, notes, and research writing from SkyPenguinLabs.",
-      matchPaths: ["/pages/spl_product_iceberg.html", "https://blogs.skypenguinlabs.us", "https://research.skypenguinlabs.us"],
+      matchPaths: ["/pages/spl_product_iceberg.html", "https://writeups.skypenguinlabs.us", "https://research.skypenguinlabs.us"],
       children: [
-        { type: "link", label: "Writeups", href: "https://blogs.skypenguinlabs.us", icon: "more", description: "Public SkyPenguinLabs blog writing.", matchPaths: ["https://blogs.skypenguinlabs.us"] },
+        { type: "link", label: "Writeups", href: "https://writeups.skypenguinlabs.us", icon: "more", description: "Public SkyPenguinLabs blog writing.", matchPaths: ["https://writeups.skypenguinlabs.us"] },
         { type: "link", label: "Whitepapers", href: "https://research.skypenguinlabs.us", icon: "projects", description: "Research notes and whitepaper publications.", matchPaths: ["https://research.skypenguinlabs.us"] },
         { type: "link", label: "Courses", href: "/pages/spl_product_iceberg.html", icon: "snippets", description: "Course and product listings from SkyPenguinLabs.", matchPaths: ["/pages/spl_product_iceberg.html"] }
       ]
