@@ -5,6 +5,7 @@
   "scripts": {
     "build": "npm run validate",
     "clean": "rm -rf output",
+    "dev": "node scripts/serve-static.js",
     "validate": "node scripts/validate-site.js",
     "test:visual": "playwright test"
   },

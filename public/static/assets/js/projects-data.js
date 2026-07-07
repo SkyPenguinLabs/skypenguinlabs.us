@@ -163,6 +163,21 @@ window.SPL_PROJECTS = [
     focus: ["Catalog UX", "Layered discovery", "Metadata clarity"],
     audience: "Visitors evaluating the SPL project surface and maintainers organizing tool catalogs.",
     repo: "https://github.com/SkyPenguinLabs"
+  },
+  {
+    slug: "pak-wolf",
+    name: "PakWolf",
+    path: "/projects/foss-forest/PakWolf/",
+    family: "FOSS Forest",
+    accent: "cyan",
+    status: "Brief",
+    stage: "In Design",
+    summary: "Digital forensics platforms for forward deployed engineers day-to-day",
+    problem: "FDEs often run into large caveats that standard compliance frameworks ignore due to compliance, ours breaks the 4th wall",
+    approach: "Literally just a 0day framework...",
+    focus: ["Catalog UX", "Layered discovery", "Metadata clarity"],
+    audience: "Visitors evaluating the SPL project surface and maintainers organizing tool catalogs.",
+    repo: "https://github.com/SkyPenguinLabs"
   }
 ];
 

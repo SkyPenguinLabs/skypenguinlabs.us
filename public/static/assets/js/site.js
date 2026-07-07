@@ -13,13 +13,12 @@
       label: "R&D",
       href: "/projects/",
       icon: "projects",
-      description: "Open-source project lanes, research briefs, and public tooling maps from SkyPenguinLabs.",
+      description: "Project briefs, research lanes, and public tooling maps from SkyPenguinLabs.",
       matchPaths: ["/projects/", "/vibelang/", "/projects/vibelang/", "/projects/r-and-d/pakwolf/", "https://mxorome.com", "/projects/ctfx/", "/projects/foss-forest/"],
       children: [
         { type: "link", label: "V.I.B.E", href: "/vibelang/", icon: "code", description: "Language and workflow research for readable automation plans and traceable operator execution.", matchPaths: ["/vibelang/", "/projects/vibelang/"] },
         { type: "link", label: "FOSS Forest", href: "/projects/foss-forest/", icon: "forest", description: "The public catalog for SPL utilities, experiments, documentation tooling, and research briefs.", matchPaths: ["/projects/foss-forest/"] },
-        { type: "link", label: "PakWolf", href: "/projects/r-and-d/pakwolf/", icon: "package", description: "R&D for artifact, package, and binary inspection workflows with defensible notes.", matchPaths: ["/projects/r-and-d/pakwolf/"] },
-        { type: "link", label: "CTFx", href: "/projects/ctfx/", icon: "flag", description: "Lab and challenge operations for focused security exercises and evidence-oriented practice.", matchPaths: ["/projects/ctfx/"] },
+        { type: "link", label: "CTFx", href: "https://ctfx.skypenguinlabs.us", icon: "flag", description: "Lab and challenge operations for focused security exercises and evidence-oriented practice.", matchPaths: ["/projects/ctfx/"] },
         { type: "link", label: "MxOramë", href: "https://mxorome.com", icon: "more", description: "Future R&D lane for memory, orchestration, and automation experiments.", matchPaths: ["https://mxorome.com"] }
       ]
     },
@@ -28,12 +27,12 @@
       label: "Education",
       href: "/pages/spl_product_iceberg.html",
       icon: "snippets",
-      description: "Courses, blogs, and research writing from SkyPenguinLabs.",
+      description: "Courses, notes, and research writing from SkyPenguinLabs.",
       matchPaths: ["/pages/spl_product_iceberg.html", "https://blogs.skypenguinlabs.us", "https://research.skypenguinlabs.us"],
       children: [
-        { type: "link", label: "Courses", href: "/pages/spl_product_iceberg.html", icon: "snippets", description: "Course and product listings from SkyPenguinLabs.", matchPaths: ["/pages/spl_product_iceberg.html"] },
-        { type: "link", label: "Blogs", href: "https://blogs.skypenguinlabs.us", icon: "more", description: "Public SkyPenguinLabs blog writing.", matchPaths: ["https://blogs.skypenguinlabs.us"] },
-        { type: "link", label: "Whitepapers", href: "https://research.skypenguinlabs.us", icon: "projects", description: "Research notes and whitepaper publications.", matchPaths: ["https://research.skypenguinlabs.us"] }
+        { type: "link", label: "Writeups", href: "https://blogs.skypenguinlabs.us", icon: "more", description: "Public SkyPenguinLabs blog writing.", matchPaths: ["https://blogs.skypenguinlabs.us"] },
+        { type: "link", label: "Whitepapers", href: "https://research.skypenguinlabs.us", icon: "projects", description: "Research notes and whitepaper publications.", matchPaths: ["https://research.skypenguinlabs.us"] },
+        { type: "link", label: "Courses", href: "/pages/spl_product_iceberg.html", icon: "snippets", description: "Course and product listings from SkyPenguinLabs.", matchPaths: ["/pages/spl_product_iceberg.html"] }
       ]
     },
     {
@@ -41,10 +40,11 @@
       label: "Support",
       href: "/shop",
       icon: "shop",
-      description: "Purchase products or reach the SkyPenguinLabs forms page.",
+      description: "Shop, forms, and direct support routes.",
       matchPaths: ["/shop", "/pages/spl_forms_list.html"],
       children: [
         { type: "link", label: "Product Shop", href: "/shop", icon: "shop", description: "Shop SkyPenguinLabs products and services.", matchPaths: ["/shop"] },
+        { type: "link", label: "Used Garage", href: "https://used.skypenguinlabs.us", icon: "mail", description: "Check out what is on sale, that has been used!", matchPaths: ["/pages/spl_forms_list.html"] }, 
         { type: "link", label: "Forms Page", href: "/pages/spl_forms_list.html", icon: "mail", description: "Open the forms page for support and contact workflows.", matchPaths: ["/pages/spl_forms_list.html"] }
       ]
     }
@@ -151,7 +151,7 @@
             <img class="brand-mark" src="${brandImage}" alt="" width="40" height="40" decoding="async">
             <span>
               <span class="brand-name">SkyPenguinLabs</span>
-              <span class="brand-kicker">Security R&D</span>
+                <span class="brand-kicker">Systems Archive</span>
             </span>
           </a>
           <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-nav-toggle><span></span></button>
@@ -177,10 +177,10 @@
               <img class="brand-mark" src="${brandImage}" alt="" width="40" height="40" loading="lazy" decoding="async">
               <span>
                 <span class="brand-name">SkyPenguinLabs</span>
-                <span class="brand-kicker">Security R&D / FOSS Engineering</span>
+                <span class="brand-kicker">Systems Archive / FOSS Engineering</span>
               </span>
             </a>
-            <p>Tools, research prototypes, documentation utilities, and contractor-oriented execution for security teams that need direct technical output.</p>
+            <p>A compact archive for public tools, research prototypes, documentation utilities, and technical support routes.</p>
             <div class="social-links" aria-label="SkyPenguinLabs social links">
               <a class="icon-link" href="mailto:contact@skypenguinlabs.com" aria-label="Email SkyPenguinLabs">${icons.mail}</a>
               <a class="icon-link" href="https://github.com/SkyPenguinLabs" aria-label="SkyPenguinLabs on GitHub">${icons.github}</a>

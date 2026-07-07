@@ -64,3 +64,24 @@
   setActive(activeIndex);
   start();
 })();
+
+(function () {
+  const dialog = document.querySelector("[data-vibe-dialog]");
+  if (!dialog) return;
+
+  const title = dialog.querySelector("[data-vibe-dialog-title]");
+  const body = dialog.querySelector("[data-vibe-dialog-body]");
+  const items = Array.from(document.querySelectorAll(".vibe-gallery-item"));
+
+  items.forEach((item) => {
+    item.addEventListener("click", () => {
+      if (title) title.textContent = item.dataset.dialogTitle || "Untitled";
+      if (body) body.textContent = item.dataset.dialogBody || "Placeholder content.";
+      if (typeof dialog.showModal === "function") {
+        dialog.showModal();
+      } else {
+        dialog.setAttribute("open", "");
+      }
+    });
+  });
+})();

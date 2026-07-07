@@ -1,26 +1,30 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>V.I.B.E. | Virtualized Intermodular Bytecode Environment</title>
-  <meta name="description" content="V.I.B.E. is the Virtualized Intermodular Bytecode Environment, a lab-born programming language for analysts, reverse engineers, exploit engineers, and quantitative builders.">
-  <link rel="stylesheet" href="/vibelang/static/HomePageDarkStyle.css">
+  <meta name="description"
+    content="V.I.B.E. is the Virtualized Intermodular Bytecode Environment, a lab-born programming language for analysts, reverse engineers, exploit engineers, and quantitative builders.">
+  <link rel="icon" type="image/png" href="/vibelang/static/assets/vibelang-avatar.png">
+  <link rel="stylesheet" href="/vibelang/static/vibelang.css">
 </head>
+
 <body id="top">
   <div class="vibe-home">
     <header class="vibe-site-header" aria-label="V.I.B.E. navigation">
       <a class="vibe-logo" href="#top" aria-label="V.I.B.E. home">
-        <span class="vibe-logo-mark" aria-hidden="true">V</span>
+        <img class="vibe-logo-mark" src="/vibelang/static/assets/vibelang-avatar.png" alt="" width="34" height="34"
+          aria-hidden="true">
         <span class="vibe-title">V.I.B.E.</span>
       </a>
 
       <nav class="vibe-nav" aria-label="Primary navigation">
-        <a href="#overview">OVERVIEW</a>
-        <a href="#runtime">RUNTIME</a>
-        <a href="#stdlib">STDLIB</a>
-        <a href="#cli">CLI</a>
-        <a href="#status">STATUS</a>
+        <a href="https://github.com/vibelang">SOURCE (GIT)</a>
+        <a href="https://github.com/vibelang/vibecodium">IDE</a>
+        <a href="https://github.com/vibelang/vibelang-demos">EXAMPLES</a>
+        <a href="https://vibelang-docs.skypenguinlabs.us">DOCUMENTATION</a>
       </nav>
     </header>
 
@@ -30,304 +34,102 @@
           <p class="vibe-kicker kicker-yellow">VIRTUALIZED INTERMODULAR BYTECODE ENVIRONMENT</p>
           <h1 id="hero-title">V.I.B.E.</h1>
           <p class="hero-lede">
-            A lab-born programming language for data analysts, exploit engineers, reverse engineers,
-            and quantitative analysts. V.I.B.E. is designed around fluid execution, visible runtime
-            behavior, and tooling that explains what happened, how it happened, and why.
-          </p>
-          <div class="hero-actions" aria-label="V.I.B.E. actions">
-            <a class="vibe-button vibe-button-cyan" href="#install">INSTALL</a>
-            <a class="vibe-button vibe-button-magenta" href="/vibelang/">PROJECT HOME</a>
-            <a class="vibe-button vibe-button-yellow" href="#docs">DOCS</a>
-          </div>
-        </div>
+            VIBE is a lab-born programming language designed for operators who need to solve technical problems quickly,
+            clearly, and under pressure. It is built for data analysts, exploit engineers, reverse engineers,
+            quantitative analysts, and technical researchers who often need to move from observation to execution
+            without fighting the language, the tooling, or unnecessary implementation overhead.
 
-        <aside class="vibe-code-frame hero-panel" aria-label="V.I.B.E. fact sheet">
-          <div class="panel-titlebar cyan-bar">
-            <span>LANGUAGE FACT SHEET</span>
-            <span class="panel-state">R&amp;D</span>
-          </div>
-          <dl class="fact-sheet">
-            <div>
-              <dt>Full Name</dt>
-              <dd>Virtualized Intermodular Bytecode Environment</dd>
-            </div>
-            <div>
-              <dt>Primary Users</dt>
-              <dd>Data analysts, exploit engineers, reverse engineers, quantitative analysts</dd>
-            </div>
-            <div>
-              <dt>Execution Path</dt>
-              <dd>source text -> lexer -> parser -> canonical AST -> compiler -> bytecode module -> VM/runtime</dd>
-            </div>
-            <div>
-              <dt>Public Entry</dt>
-              <dd>Explicit commands only: <code>vibe run</code>, <code>vibe repl</code>, <code>vibe bench</code>, <code>vibe config</code>, <code>vibe diagnose</code>, <code>vibe tool</code>, <code>vibe help</code></dd>
-            </div>
-            <div>
-              <dt>Current Reality</dt>
-              <dd>Used in field and production-facing experiments, but still treated as an unstable lab R&amp;D language.</dd>
-            </div>
-          </dl>
-        </aside>
-      </section>
+            <br>
+            <br>
 
-      <section id="overview" class="dense-section" aria-labelledby="overview-title">
-        <div class="section-heading compact">
-          <p class="vibe-kicker kicker-cyan">OVERVIEW</p>
-          <h2 id="overview-title">The language is a complete product surface, not just syntax.</h2>
-        </div>
+            The core problem VIBE addresses is not that older languages are useless. Languages such as Python, C,
+            Haskell, and R remain valuable because they have strong ecosystems, mature tooling, and communities that
+            have already solved large classes of problems. The issue is that modern operators often inherit those
+            languages by default rather than selecting them because they are the best fit for the specific task,
+            environment, or execution model.
 
-        <div class="three-column">
-          <article class="vibe-card cyan">
-            <h3>Source Model</h3>
-            <p>V.I.B.E. programs are processed through a conventional but inspectable pipeline: source text, lexer, parser, canonical AST, compiler, bytecode module, and VM/runtime output.</p>
-            <ul>
-              <li>Language behavior is tied to audit corpus evidence.</li>
-              <li>Syntax profiles and execution profiles are part of the surrounding system.</li>
-              <li>Docs, examples, skills, tests, and runtime behavior are expected to stay aligned.</li>
-            </ul>
-          </article>
+            <br>
+            <br>
 
-          <article class="vibe-card magenta">
-            <h3>Runtime Model</h3>
-            <p>The runtime centers on explicit values, environments, modules, plugins, native integration, taint/safety policy, scheduler behavior, traces, reports, and output contracts.</p>
-            <ul>
-              <li>Runtime-facing changes require tests or audit proof.</li>
-              <li>Diagnostic output is treated as part of the product contract.</li>
-              <li>Unsafe capabilities are gated by execution profile flags.</li>
-            </ul>
-          </article>
+            In many technical workflows, language choice is shaped by familiarity, ecosystem momentum, syntax
+            preference, available libraries, deployment constraints, and low-level access requirements. Python is often
+            chosen because it is accessible, widely installed, and supported by an enormous third-party ecosystem. C is
+            often chosen when engineers need precise control over memory, binaries, systems, or exploit primitives. R
+            and Haskell are often valued for their strengths in data handling, statistical modeling, functional design,
+            or formal reasoning. These languages are not wrong choices, but they were not all designed around the same
+            modern operational model.
 
-          <article class="vibe-card yellow">
-            <h3>Tooling Model</h3>
-            <p>The CLI is the user-facing boundary. Help metadata, command manifests, config profiles, benchmarks, logs, indexes, and workbench behavior all feed the same language surface.</p>
-            <ul>
-              <li><code>vibe help explain</code> exposes command, flag, module, builtin, keyword, topic, config, and environment metadata.</li>
-              <li>Workbench and regular source files keep newline-delimited parser behavior.</li>
-              <li>One-liner semicolon normalization is scoped to explicit one-liner mode.</li>
-            </ul>
-          </article>
-        </div>
-      </section>
+            <br>
+            <br>
 
-      <section id="runtime" class="split-section" aria-labelledby="runtime-title">
-        <div class="vibe-code-frame command-panel">
-          <div class="panel-titlebar magenta-bar">
-            <span>RUNTIME FLOW</span>
-            <span class="panel-state">BYTECODE</span>
-          </div>
-          <ol class="pipeline-list">
-            <li><span>01</span><strong>Source text</strong><em>.vib program, one-liner source, or REPL input</em></li>
-            <li><span>02</span><strong>Lexer</strong><em>tokens and source positions</em></li>
-            <li><span>03</span><strong>Parser</strong><em>canonical AST construction</em></li>
-            <li><span>04</span><strong>Compiler</strong><em>bytecode module generation</em></li>
-            <li><span>05</span><strong>VM/runtime</strong><em>values, environments, modules, reports, traces, outputs</em></li>
-          </ol>
-        </div>
+            VIBE starts from a different premise: the language should adapt to the operator’s workflow, not the other
+            way around.
 
-        <div class="copy-panel">
-          <p class="vibe-kicker kicker-magenta">RUNTIME</p>
-          <h2 id="runtime-title">Designed around evidence and explainability.</h2>
-          <p>
-            The V.I.B.E. repo treats language runs, behavioral changes, syntax changes,
-            runtime capability changes, safety changes, and toolchain changes as one product
-            surface. That means a runtime feature is not finished just because it executes:
-            it also needs evidence in tests, audit corpus cases, examples, documentation, or
-            skill updates.
-          </p>
-          <p>
-            The broad mastery path is source model first, execution model second, runtime
-            integration third, then evidence through audit corpus, fuzz seeds, examples,
-            benchmarks, docs, and release governance.
+            <br>
+            <br>
+
+            Instead of forcing engineers into a single syntax philosophy or runtime model, VIBE is designed around
+            flexibility, interoperability, and speed to execution. Its goal is to make common operational tasks feel
+            direct: parse data, transform it, benchmark it, test assumptions, interact with systems, model behavior, and
+            move from quick proof-of-concept to repeatable tooling with fewer unnecessary steps.
+
+            <br>
+            <br>
+
+            A recurring issue in software engineering is language favoritism. Engineers often defend a language because
+            its syntax feels natural, its ecosystem is familiar, or its constraints match how they already think. VIBE
+            treats that bias as a design problem. Rather than assuming one syntax style, one runtime behavior, or one
+            execution model is universally correct, VIBE is built to support configurable syntax preferences, modular
+            runtime behavior, flexible VM and bytecode design, and native interoperability with other languages,
+            processes, protocols, systems, and data standards.
+
+            <br>
+            <br>
+
+            This matters because modern technical work increasingly crosses boundaries. A reverse engineer may need
+            binary-level inspection, structured data extraction, symbolic analysis, automation, and reporting in the
+            same workflow. A data analyst may need fast transformations, reproducible benchmarks, and system-level
+            integrations. An exploit engineer may need low-level awareness without losing the speed and expressiveness
+            of a higher-level language. VIBE is designed to reduce the friction between those modes.
+
+            <br>
+            <br>
+
+            The language also challenges the assumption that advanced language features must require complex
+            integrations or heavy abstractions. Capabilities such as native mathematical symbols, operator-oriented
+            syntax, benchmark-first tooling, structured interoperability, and task-specific standard libraries can be
+            treated as first-class language features rather than external patches or third-party dependencies.
+
+            <br>
+            <br>
+
+            VIBE is not an argument that every existing language should be replaced. It is an argument that modern
+            operational problems deserve tools designed around modern operational constraints. The objective is not to
+            choose a favorite language. The objective is to choose the right execution model, the right syntax surface,
+            the right runtime behavior, and the shortest reliable path from idea to result.
+
+            <br>
+            <br>
+
+            VIBE asks a simple question: what changes when a programming language is designed around the way technical
+            operators actually work, instead of the way legacy language ecosystems expect them to work?
+            <br><br>
+            Now the technical and complexity limitation isn't - what happens when you push the model? Even when people are against
+            it?
           </p>
         </div>
-      </section>
-
-      <section id="stdlib" class="dense-section" aria-labelledby="stdlib-title">
-        <div class="section-heading compact">
-          <p class="vibe-kicker kicker-yellow">STANDARD LIBRARY</p>
-          <h2 id="stdlib-title">Topic modules with explicit registration.</h2>
-        </div>
-
-        <div class="module-grid">
-          <article class="module-card"><strong>std.math</strong><span>math topic root; canonical leaf example: <code>std/math/algebra</code></span></article>
-          <article class="module-card"><strong>std.media</strong><span>media topic root; canonical leaf example: <code>std/media/png</code></span></article>
-          <article class="module-card"><strong>std.data</strong><span>data topic root; canonical leaf example: <code>std/data/bin</code></span></article>
-          <article class="module-card"><strong>std.net</strong><span>aggregates HTTP, TCP, UDP, ICMP, raw, proxy, and testing modules</span></article>
-          <article class="module-card"><strong>std.runtime</strong><span>runtime topic root; canonical leaf example: <code>std/runtime/errors</code></span></article>
-          <article class="module-card"><strong>std.files</strong><span>files topic root; canonical leaf example: <code>std/files/fsio</code></span></article>
-          <article class="module-card"><strong>std.frontend</strong><span>frontend topic root; canonical leaf example: <code>std/frontend/fancy</code></span></article>
-          <article class="module-card"><strong>std.userland</strong><span>reserved userland branch for higher-level runtime-facing helpers</span></article>
-        </div>
-
-        <div class="notice-row">
-          <div class="notice cyan">
-            <h3>Registration</h3>
-            <p><code>register("std")</code> exposes only the root topic modules. <code>register("std/&lt;topic&gt;")</code> binds one aggregate module with shared helpers plus nested child modules.</p>
-          </div>
-          <div class="notice magenta">
-            <h3>Removed Flat Paths</h3>
-            <p>Flat native paths such as <code>std/io</code>, <code>std/algebra</code>, <code>std/png</code>, and <code>std/error</code> are removed with no compatibility aliases.</p>
-          </div>
-          <div class="notice yellow">
-            <h3>Gated Branches</h3>
-            <p><code>std/web3</code> is exposed only behind <code>compile.enable_blockchain_types</code>. <code>std/net/raw</code> requires <code>runtime.enable_raw_network</code>.</p>
-          </div>
-        </div>
-      </section>
-
-      <section id="networking" class="split-section reverse" aria-labelledby="networking-title">
-        <div class="copy-panel">
-          <p class="vibe-kicker kicker-cyan">NATIVE NETWORKING V1</p>
-          <h2 id="networking-title">HTTP-first, with lower-level lanes available.</h2>
-          <p>
-            The current native networking surface is HTTP-first. <code>std/net/http</code>
-            includes client helpers plus router, route, server startup, directory serving,
-            file serving, listen/accept/respond helpers, request and response parsing,
-            raw request and response helpers, stats, events, and response builders for JSON,
-            text, files, directories, and redirects.
-          </p>
-          <p>
-            TCP supports configurable listeners, accept deadlines, read/write deadlines,
-            socket options, half-close helpers, byte send/receive, and address metadata.
-            Proxy support provides managed reverse proxy handles with route metadata, stats,
-            and event rings. Testing helpers are localhost-oriented.
-          </p>
-        </div>
-
-        <div class="vibe-code-frame code-sample">
-          <div class="panel-titlebar cyan-bar">
-            <span>NETWORKING SHAPE</span>
-            <span class="panel-state">std/net</span>
-          </div>
-          <pre><code><span class="code-key">register</span>(<span class="code-string">"std/net"</span>)
-
-http.router()
-http.route(router, <span class="code-string">"GET"</span>, <span class="code-string">"/status"</span>, handler)
-http.start_server(router, <span class="code-string">"127.0.0.1:8080"</span>)
-
-tcp.listen(addr, opts)
-proxy.stats(handle)
-testing.localhost_server(fn(req) { ... })
-
-<span class="code-comment"># raw network V1 is gated and bounded</span>
-<span class="code-key">flag</span>: --runtime-enable-raw-network</code></pre>
-        </div>
-      </section>
-
-      <section id="cli" class="dense-section" aria-labelledby="cli-title">
-        <div class="section-heading compact">
-          <p class="vibe-kicker kicker-magenta">CLI</p>
-          <h2 id="cli-title">Explicit commands, metadata-heavy help, and one-liner execution.</h2>
-        </div>
-
-        <div class="command-grid">
-          <article><code>vibe help</code><span>guided overview with command categories, workflows, examples, related explain targets, and metadata source</span></article>
-          <article><code>vibe run ./tests/corpus/audit/pass/01-core-runtime-audit.vib</code><span>execute source files through the command dispatcher</span></article>
-          <article><code>vibe repl</code><span>interactive workbench entry</span></article>
-          <article><code>vibe bench run --manifest benchmarks/manifest.json</code><span>benchmark run using an explicit manifest</span></article>
-          <article><code>vibe config show</code><span>inspect active configuration</span></article>
-          <article><code>vibe diagnose runtime_error</code><span>human-readable diagnostic route</span></article>
-          <article><code>vibe tool idx get runtime_error</code><span>artifact utility routed under <code>vibe tool</code></span></article>
-          <article><code>vibe help explain flag --runtime-trace</code><span>metadata explanation for commands, flags, modules, builtins, keywords, topics, config keys, and environment variables</span></article>
-        </div>
-
-        <div class="vibe-code-frame one-liner-panel">
-          <div class="panel-titlebar yellow-bar">
-            <span>ONE-LINER MODE</span>
-            <span class="panel-state">vibe run</span>
-          </div>
-          <pre><code>vibe run -e 'print("hi")'
-vibe run -ne 'if line == "keep" { print(line) }' input.txt
-vibe run -pe 'line = line + "!"' notes.txt
-vibe run -ane 'print(fields[0], fields[1])' -F: data.txt
-vibe run -0777 -ne 'print(len(line))' blob.txt
-vibe run -pi.bak -e 'line = line + "!"' notes.txt
-vibe run -M std/data/text --begin 'print("BEGIN")' -e 'print(line)' --end 'print("END")' -- file-arg</code></pre>
-        </div>
-      </section>
-
-      <section id="install" class="split-section" aria-labelledby="install-title">
-        <div class="vibe-code-frame code-sample">
-          <div class="panel-titlebar magenta-bar">
-            <span>LINUX INSTALLER</span>
-            <span class="panel-state">SOURCE</span>
-          </div>
-          <pre><code>cd ~/Desktop/vibe
-./install.sh status
-./install.sh install --artifact source
-
-<span class="code-comment"># non-interactive installs print required package commands</span>
-./install.sh install --artifact source --yes</code></pre>
-        </div>
-
-        <div class="copy-panel">
-          <p class="vibe-kicker kicker-yellow">INSTALLER</p>
-          <h2 id="install-title">Linux-only in this workspace.</h2>
-          <p>
-            The installer detects Debian/Ubuntu, Arch-family, or generic Linux from
-            <code>/etc/os-release</code>. Interactive installs may prompt before invoking
-            package managers. Non-interactive runs and <code>--yes</code> do not auto-install
-            packages; they print the exact package command and fail fast.
-          </p>
-          <p>
-            If a source refresh fails during <code>--artifact source --update-source</code>,
-            the installer can fall back to the local checkout when <code>go.mod</code>,
-            <code>cmd/vibe</code>, and <code>.vibe_lang_store</code> are present.
-          </p>
-        </div>
-      </section>
-
-      <section id="status" class="status-section" aria-labelledby="status-title">
-        <div class="section-heading compact">
-          <p class="vibe-kicker kicker-cyan">STATUS</p>
-          <h2 id="status-title">Current state and boundaries.</h2>
-        </div>
-
-        <div class="status-grid">
-          <article class="status-card stable">
-            <h3>Available Now</h3>
-            <ul>
-              <li>Explicit command suite under the <code>vibe</code> binary.</li>
-              <li>Terminal-aware help with <code>--color auto|always|never</code> and <code>--no-color</code>.</li>
-              <li>One-liner flags under <code>vibe run</code>: <code>-e</code>, <code>-n</code>, <code>-p</code>, <code>-a</code>, <code>-F</code>, <code>-0</code>, <code>-i</code>, <code>-M</code>, <code>--begin</code>, <code>--end</code>, and <code>--dump-expanded-source</code>.</li>
-              <li>Native networking V1 with HTTP, TCP, proxy, testing, and gated raw networking.</li>
-            </ul>
-          </article>
-
-          <article class="status-card caution">
-            <h3>Intentional Removals</h3>
-            <ul>
-              <li>No direct <code>vibe &lt;file&gt;</code> execution form.</li>
-              <li>No implicit no-argument REPL startup.</li>
-              <li>No top-level operational flags, top-level <code>--help</code>, <code>--ui-repl</code>, or separate <code>vibe-bench</code> binary.</li>
-              <li><code>vibe help serve</code> and older internal docserver routes are retired.</li>
-            </ul>
-          </article>
-
-          <article class="status-card risk">
-            <h3>R&amp;D Caveat</h3>
-            <ul>
-              <li>The language is still a lab-based research and development experiment.</li>
-              <li>It is used in field operations and production-facing applications, but should not be treated as broadly stable.</li>
-              <li>The checkout currently notes a docs/examples gap; runtime-facing changes should be reflected in README, help/catalog metadata, skills, and audit corpus until those trees are restored.</li>
-              <li>Reserved branches stay out of the runtime catalog until implemented.</li>
-            </ul>
-          </article>
-        </div>
-      </section>
-
-      <section id="docs" class="docs-strip" aria-label="Documentation links">
-        <a class="vibe-button vibe-button-cyan" href="/vibelang/">VIBELANG HOME</a>
-        <a class="vibe-button vibe-button-magenta" href="/vibelang/">LANGUAGE DOCS</a>
-        <a class="vibe-button vibe-button-yellow" href="#top">BACK TO TOP</a>
       </section>
     </main>
-
     <footer class="vibe-site-footer">
-      <span>V.I.B.E. / LAB R&amp;D PROGRAMMING LANGUAGE</span>
-      <span>VIRTUALIZED INTERMODULAR BYTECODE ENVIRONMENT</span>
+      <span class="vibe-powered">
+        Powered by
+        <a href="https://skypenguinlabs.us" aria-label="SkyPenguinLabs">
+          <img src="/vibelang/static/assets/skypenguinlabs-avatar.png" alt="SkyPenguinLabs" width="28" height="28">
+        </a>
+      </span>
+      <a class="vibe-footer-link" href="/vibelang/a-long-time-ago/">a long time ago...</a>
     </footer>
   </div>
 </body>
+
 </html>
