@@ -14,11 +14,11 @@
       href: "/projects/",
       icon: "projects",
       description: "Project briefs, research lanes, and public tooling maps from SkyPenguinLabs.",
-      matchPaths: ["/projects/", "/vibelang/", "/projects/vibelang/", "/projects/r-and-d/pakwolf/", "https://mxorome.com", "/projects/ctfx/", "/projects/foss-forest/"],
+      matchPaths: ["/projects/", "/vibelang/", "/projects/vibelang/", "https://mxorome.com","/projects/foss-forest/"],
       children: [
         { type: "link", label: "V.I.B.E", href: "/vibelang/", icon: "code", description: "Language and workflow research for readable automation plans and traceable operator execution.", matchPaths: ["/vibelang/", "/projects/vibelang/"] },
         { type: "link", label: "FOSS Forest", href: "/projects/foss-forest/", icon: "forest", description: "The public catalog for SPL utilities, experiments, documentation tooling, and research briefs.", matchPaths: ["/projects/foss-forest/"] },
-        { type: "link", label: "CTFx", href: "https://ctfx.skypenguinlabs.us", icon: "flag", description: "Lab and challenge operations for focused security exercises and evidence-oriented practice.", matchPaths: ["/projects/ctfx/"] },
+        { type: "link", label: "CTFx", href: "https://ctfx.skypenguinlabs.us", icon: "flag", description: "Lab and challenge operations for focused security exercises and evidence-oriented practice.", matchPaths: ["https://ctfx.skypenguinlabs.us"] },
         { type: "link", label: "MxOramë", href: "https://mxorome.com", icon: "more", description: "Future R&D lane for memory, orchestration, and automation experiments.", matchPaths: ["https://mxorome.com"] }
       ]
     },

@@ -43,8 +43,6 @@
     { "path": "/projects/foss-forest/spl-iceberg/", "title": "spl-ICEberg", "status": "live" },
     { "path": "/projects/foss-forest/spl-samuel/", "title": "spl-SAMuel", "status": "live" },
     { "path": "/projects/foss-forest/txrop/", "title": "txrop", "status": "live" },
-    { "path": "/projects/r-and-d/pakwolf/", "title": "PakWolf", "status": "live" },
-    { "path": "/projects/ctfx/", "title": "CTFx", "status": "live" },
     { "path": "/tools/", "title": "Utilities", "status": "live" },
     { "path": "/tools/view/", "title": "Utility Detail", "status": "live" },
     { "path": "/sec-tips/", "title": "Security Tips", "status": "live" },

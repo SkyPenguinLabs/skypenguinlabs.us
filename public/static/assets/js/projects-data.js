@@ -14,21 +14,7 @@ window.SPL_PROJECTS = [
     audience: "Security engineers, contractors, and research teams that need understandable automation.",
     repo: "https://github.com/SkyPenguinLabs"
   },
-  {
-    slug: "ctfx",
-    name: "CTFx",
-    path: "/projects/ctfx/",
-    family: "Training Infrastructure",
-    accent: "magenta",
-    status: "Project brief",
-    stage: "Early buildout",
-    summary: "A CTF and lab operations surface for running focused security exercises without turning the site into a course storefront.",
-    problem: "Practice environments need structure, repeatability, and evidence capture while staying lightweight enough to run in public or private labs.",
-    approach: "CTFx keeps challenge operations, lab metadata, and participant-facing surfaces separated from commercial course delivery.",
-    focus: ["Challenge operations", "Lab metadata", "Evidence-oriented workflows"],
-    audience: "Teams preparing exercises, demos, and security training infrastructure.",
-    repo: "https://github.com/SkyPenguinLabs"
-  },
+
   {
     slug: "pakwolf",
     name: "PakWolf",
