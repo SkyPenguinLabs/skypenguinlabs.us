@@ -31,19 +31,19 @@
       matchPaths: ["/pages/spl_product_iceberg.html", "https://writeups.skypenguinlabs.us", "https://research.skypenguinlabs.us"],
       children: [
         { type: "link", label: "Writeups", href: "https://writeups.skypenguinlabs.us", icon: "more", description: "Public SkyPenguinLabs blog writing.", matchPaths: ["https://writeups.skypenguinlabs.us"] },
-        { type: "link", label: "Whitepapers", href: "https://research.skypenguinlabs.us", icon: "projects", description: "Research notes and whitepaper publications.", matchPaths: ["https://research.skypenguinlabs.us"] },
+        { type: "link", label: "Research Papers", href: "https://research.skypenguinlabs.us", icon: "projects", description: "Research notes and whitepaper publications.", matchPaths: ["https://research.skypenguinlabs.us"] },
         { type: "link", label: "Courses", href: "/pages/spl_product_iceberg.html", icon: "snippets", description: "Course and product listings from SkyPenguinLabs.", matchPaths: ["/pages/spl_product_iceberg.html"] }
       ]
     },
     {
       type: "group",
       label: "Support",
-      href: "/shop",
+      href: "https://shop.skypenguinlabs.com",
       icon: "shop",
       description: "Shop, forms, and direct support routes.",
-      matchPaths: ["/shop", "/pages/spl_forms_list.html"],
+      matchPaths: ["https://shop.skypenguinlabs.com", "/pages/spl_forms_list.html"],
       children: [
-        { type: "link", label: "Product Shop", href: "/shop", icon: "shop", description: "Shop SkyPenguinLabs products and services.", matchPaths: ["/shop"] },
+        { type: "link", label: "Product Shop", href: "https://shop.skypenguinlabs.com", icon: "shop", description: "Shop SkyPenguinLabs products and services.", matchPaths: ["https://shop.skypenguinlabs.com"] },
         { type: "link", label: "Used Garage", href: "https://used.skypenguinlabs.us", icon: "mail", description: "Check out what is on sale, that has been used!", matchPaths: ["/pages/spl_forms_list.html"] }, 
         { type: "link", label: "Forms Page", href: "/pages/spl_forms_list.html", icon: "mail", description: "Open the forms page for support and contact workflows.", matchPaths: ["/pages/spl_forms_list.html"] }
       ]
@@ -151,7 +151,6 @@
             <img class="brand-mark" src="${brandImage}" alt="" width="40" height="40" decoding="async">
             <span>
               <span class="brand-name">SkyPenguinLabs</span>
-                <span class="brand-kicker">Systems Archive</span>
             </span>
           </a>
           <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false" data-nav-toggle><span></span></button>
@@ -177,13 +176,9 @@
               <img class="brand-mark" src="${brandImage}" alt="" width="40" height="40" loading="lazy" decoding="async">
               <span>
                 <span class="brand-name">SkyPenguinLabs</span>
-                <span class="brand-kicker">Systems Archive / FOSS Engineering</span>
               </span>
             </a>
-            <p>A compact archive for public tools, research prototypes, documentation utilities, and technical support routes.</p>
             <div class="social-links" aria-label="SkyPenguinLabs social links">
-              <a class="icon-link" href="mailto:contact@skypenguinlabs.com" aria-label="Email SkyPenguinLabs">${icons.mail}</a>
-              <a class="icon-link" href="https://github.com/SkyPenguinLabs" aria-label="SkyPenguinLabs on GitHub">${icons.github}</a>
               <a class="icon-link" href="https://x.com/SkyPenguinLabs" aria-label="SkyPenguinLabs on X">${icons.x}</a>
               <a class="icon-link" href="https://instagram.com/SkyPenguinLabs" aria-label="SkyPenguinLabs on Instagram">${icons.instagram}</a>
             </div>
@@ -217,50 +212,89 @@
     const nav = document.querySelector("[data-site-nav]");
     if (!toggle || !nav) return;
 
+    const headerEl = document.querySelector(".site-header");
     const desktopGroups = Array.from(document.querySelectorAll("[data-nav-group]"));
     const mobileTriggers = Array.from(document.querySelectorAll("[data-mobile-nav-trigger]"));
     let closeTimer = null;
     let openTimer = null;
+    let activeDesktopGroup = null;
+    const desktopGroupDefaults = new WeakMap();
+
+    function syncDesktopChrome() {
+      const open = desktopGroups.some((group) => group.classList.contains("is-open"));
+      headerEl?.classList.toggle("is-nav-open", open);
+    }
 
     function closeDesktopGroups(except = null) {
       desktopGroups.forEach((group) => {
         if (group === except) return;
         group.classList.remove("is-open");
+        group.classList.remove("is-closing");
         group.querySelector("[data-nav-trigger]")?.setAttribute("aria-expanded", "false");
       });
+      if (activeDesktopGroup !== except) activeDesktopGroup = except;
+      syncDesktopChrome();
     }
 
     function openDesktopGroup(group) {
       if (closeTimer) window.clearTimeout(closeTimer);
       if (openTimer) window.clearTimeout(openTimer);
+      const previousGroup = activeDesktopGroup && activeDesktopGroup !== group ? activeDesktopGroup : null;
+      if (previousGroup) {
+        headerEl?.classList.add("is-nav-switching");
+        previousGroup.classList.add("is-switching-out");
+        group.classList.add("is-switching-open");
+      }
       closeDesktopGroups(group);
+      group.classList.remove("is-closing");
       group.classList.add("is-open");
+      activeDesktopGroup = group;
       group.querySelector("[data-nav-trigger]")?.setAttribute("aria-expanded", "true");
+      syncDesktopChrome();
+      if (previousGroup) {
+        window.requestAnimationFrame(() => {
+          window.requestAnimationFrame(() => {
+            headerEl?.classList.remove("is-nav-switching");
+            previousGroup.classList.remove("is-switching-out");
+            group.classList.remove("is-switching-open");
+          });
+        });
+      }
     }
 
     function scheduleDesktopOpen(group) {
       if (closeTimer) window.clearTimeout(closeTimer);
       if (openTimer) window.clearTimeout(openTimer);
-      openTimer = window.setTimeout(() => {
-        openDesktopGroup(group);
-      }, 90);
+      openDesktopGroup(group);
     }
 
-    function scheduleDesktopClose(group) {
+    function scheduleDesktopClose(group = activeDesktopGroup) {
+      if (!group) return;
       if (closeTimer) window.clearTimeout(closeTimer);
       if (openTimer) window.clearTimeout(openTimer);
       closeTimer = window.setTimeout(() => {
+        if (activeDesktopGroup !== group) return;
         group.classList.remove("is-open");
-        group.querySelector("[data-nav-trigger]")?.setAttribute("aria-expanded", "false");
-      }, 120);
+        group.classList.add("is-closing");
+        activeDesktopGroup = null;
+        const trigger = group.querySelector("[data-nav-trigger]");
+        trigger?.setAttribute("aria-expanded", "false");
+        syncDesktopChrome();
+        window.setTimeout(() => {
+          group.classList.remove("is-closing");
+          syncDesktopChrome();
+        }, 430);
+      }, 90);
     }
 
     desktopGroups.forEach((group) => {
       const trigger = group.querySelector("[data-nav-trigger]");
+      const panel = group.querySelector("[data-nav-panel]");
       const briefTitle = group.querySelector("[data-nav-brief-title]");
       const briefCopy = group.querySelector("[data-nav-brief-copy]");
       const defaultTitle = briefTitle?.textContent || "";
       const defaultCopy = briefCopy?.textContent || "";
+      desktopGroupDefaults.set(group, { title: defaultTitle, copy: defaultCopy });
 
       function setBrief(title, copy) {
         if (briefTitle) briefTitle.textContent = title;
@@ -278,27 +312,31 @@
       });
 
       group.addEventListener("mouseenter", () => scheduleDesktopOpen(group));
-      group.addEventListener("mouseleave", () => {
-        setBrief(defaultTitle, defaultCopy);
-        scheduleDesktopClose(group);
-      });
+      panel?.addEventListener("mouseenter", () => scheduleDesktopOpen(group));
       group.addEventListener("focusin", () => scheduleDesktopOpen(group));
       group.addEventListener("focusout", () => {
         window.setTimeout(() => {
-          if (!group.contains(document.activeElement)) {
+          if (!headerEl?.contains(document.activeElement)) {
             setBrief(defaultTitle, defaultCopy);
-            scheduleDesktopClose(group);
+            scheduleDesktopClose();
           }
         }, 0);
       });
       trigger?.addEventListener("click", () => {
-        const open = group.classList.contains("is-open");
-        if (open) {
-          closeDesktopGroups();
-        } else {
-          openDesktopGroup(group);
-        }
+        openDesktopGroup(group);
       });
+    });
+
+    headerEl?.addEventListener("mouseleave", () => {
+      const group = activeDesktopGroup;
+      const defaults = group ? desktopGroupDefaults.get(group) : null;
+      const briefTitle = group?.querySelector("[data-nav-brief-title]");
+      const briefCopy = group?.querySelector("[data-nav-brief-copy]");
+      if (defaults && briefTitle && briefCopy) {
+        briefTitle.textContent = defaults.title;
+        briefCopy.textContent = defaults.copy;
+      }
+      scheduleDesktopClose(group);
     });
 
     function setMobileOpen(open) {
@@ -339,14 +377,14 @@
     document.addEventListener("keydown", (event) => {
       if (event.key !== "Escape") return;
       setMobileOpen(false);
-      closeDesktopGroups();
+      scheduleDesktopClose(activeDesktopGroup);
       toggle.blur();
     });
 
     document.addEventListener("click", (event) => {
       if (event.target.closest(".site-header")) return;
       setMobileOpen(false);
-      closeDesktopGroups();
+      scheduleDesktopClose(activeDesktopGroup);
     });
   }
 

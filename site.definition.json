@@ -51,7 +51,7 @@
     { "path": "/pages/spl_art_cave.html", "title": "Art Cave", "status": "legacy" },
     { "path": "/pages/tos.html", "title": "Terms of Use", "status": "legacy" },
     { "path": "/war-room/", "title": "War Room", "status": "live" },
-    { "path": "/whitepapers/", "title": "Whitepapers", "status": "planned" },
+    { "path": "/Research Papers/", "title": "Research Papers", "status": "planned" },
     { "path": "/mission/", "title": "Mission", "status": "planned" },
     { "path": "/tools/docs/", "title": "Documentation Index", "status": "planned" },
     { "path": "/tools/upcoming/", "title": "Upcoming Utilities", "status": "planned" }
@@ -61,7 +61,7 @@
     { "label": "Home", "href": "/" },
     { "label": "R&D", "href": "/projects/" },
     { "label": "Education", "href": "/pages/spl_product_iceberg.html" },
-    { "label": "Support", "href": "/shop" }
+    { "label": "Support", "href": "https://shop.skypenguinlabs.com" }
   ],
   "productionChecks": {
     "requireLiveRouteFiles": true,
