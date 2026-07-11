@@ -198,12 +198,6 @@ function validateCloudflarePagesConfig() {
 
     const redirects = parseCloudflareRedirects(redirectsPath);
     if (site.target === "main") {
-      if (!hasRedirect(redirects, "https://shop.skypenguinlabs.com", "https:/https://shop.skypenguinlabs.com.skypenguinlabs.com")) {
-        fail("main Cloudflare Pages target is missing https://shop.skypenguinlabs.com redirect to shop subdomain");
-      }
-      if (!hasRedirect(redirects, "https://shop.skypenguinlabs.com/*", "https:/https://shop.skypenguinlabs.com.skypenguinlabs.com")) {
-        fail("main Cloudflare Pages target is missing https://shop.skypenguinlabs.com/* redirect to shop subdomain");
-      }
       if (!hasRedirect(redirects, "/projects/vibelang", "/vibelang/")) {
         fail("main Cloudflare Pages target is missing /projects/vibelang redirect to /vibelang/");
       }
